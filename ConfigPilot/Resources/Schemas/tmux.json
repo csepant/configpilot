@@ -1,0 +1,671 @@
+{
+  "tool": {
+    "id": "tmux",
+    "name": "tmux",
+    "category": "Dev Tools",
+    "configPaths": [
+      "~/.tmux.conf",
+      "~/.config/tmux/tmux.conf"
+    ],
+    "configFormat": "ini",
+    "iconName": "rectangle.split.3x1"
+  },
+  "sections": [
+    {
+      "id": "server",
+      "name": "Server Options",
+      "description": "Global server-level settings that affect all sessions and windows.",
+      "parameters": [
+        {
+          "id": "server.default-terminal",
+          "key": "default-terminal",
+          "type": "string",
+          "defaultValue": "screen",
+          "description": "Set the default terminal type for new windows. Should generally be set to 'screen-256color' or 'tmux-256color' to enable 256-color support.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "server.escape-time",
+          "key": "escape-time",
+          "type": "int",
+          "defaultValue": "500",
+          "description": "Time in milliseconds tmux waits after an escape key is pressed to determine if it is part of a longer key sequence. Lower values (e.g. 0 or 10) reduce delay when pressing Escape in Vim.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "server.focus-events",
+          "key": "focus-events",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, tmux passes focus-in and focus-out events through to applications running inside. Required for some Vim autocommand triggers.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "server.set-clipboard",
+          "key": "set-clipboard",
+          "type": "enum",
+          "defaultValue": "external",
+          "description": "Controls whether tmux attempts to set the system clipboard using the xterm escape sequence. 'on' sets both tmux and system clipboard, 'external' only sets system clipboard, 'off' disables clipboard integration.",
+          "validValues": [
+            "on",
+            "external",
+            "off"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "server.history-limit",
+          "key": "history-limit",
+          "type": "int",
+          "defaultValue": "2000",
+          "description": "Maximum number of lines held in scrollback history for each pane. Higher values use more memory. Common values are 5000-50000.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "server.buffer-limit",
+          "key": "buffer-limit",
+          "type": "int",
+          "defaultValue": "50",
+          "description": "Maximum number of paste buffers kept by the server. Older buffers are deleted when this limit is reached.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "session",
+      "name": "Session Options",
+      "description": "Settings that apply at the session level, controlling behavior for all windows within a session.",
+      "parameters": [
+        {
+          "id": "session.base-index",
+          "key": "base-index",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Starting index for numbering windows. Set to 1 so window numbering matches keyboard layout (1-9 on the number row).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.detach-on-destroy",
+          "key": "detach-on-destroy",
+          "type": "enum",
+          "defaultValue": "on",
+          "description": "Controls what happens when the last shell in a session is destroyed. 'on' detaches the client, 'off' switches to another session if available, 'no-detached' only switches to sessions with no attached clients.",
+          "validValues": [
+            "on",
+            "off",
+            "no-detached"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.lock-after-time",
+          "key": "lock-after-time",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Lock the session after this many seconds of inactivity. A value of 0 disables automatic locking.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.lock-command",
+          "key": "lock-command",
+          "type": "string",
+          "defaultValue": "lock -np",
+          "description": "Command to run when the session is locked. Common alternatives include 'vlock' or custom lock screen scripts.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.mouse",
+          "key": "mouse",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable mouse support. When on, the mouse can be used to select panes, resize panes, scroll through history, and select text in copy mode.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.prefix",
+          "key": "prefix",
+          "type": "string",
+          "defaultValue": "C-b",
+          "description": "Key combination used as the prefix for tmux commands. Many users remap this to 'C-a' for easier access.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.renumber-windows",
+          "key": "renumber-windows",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, automatically renumber windows sequentially when a window is closed, preventing gaps in the numbering.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.set-titles",
+          "key": "set-titles",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Attempt to set the terminal emulator title using the xterm title-setting escape sequence.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "session.status",
+          "key": "status",
+          "type": "enum",
+          "defaultValue": "on",
+          "description": "Controls the visibility of the status bar. Can be turned off to maximize screen real estate or set to show on specific conditions.",
+          "validValues": [
+            "on",
+            "off",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "window",
+      "name": "Window Options",
+      "description": "Settings that control the behavior and appearance of individual windows.",
+      "parameters": [
+        {
+          "id": "window.aggressive-resize",
+          "key": "aggressive-resize",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, the window is resized to the size of the smallest or largest session for which it is the current window, rather than the smallest or largest session to which it is attached.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.automatic-rename",
+          "key": "automatic-rename",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically rename windows based on the currently running command. Disable this if you prefer to set window names manually.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.automatic-rename-format",
+          "key": "automatic-rename-format",
+          "type": "string",
+          "defaultValue": "#{?pane_in_mode,[tmux],#{pane_current_command}}#{?pane_dead,[dead],}",
+          "description": "Format string used for automatic window renaming. Supports tmux format variables like #{pane_current_command} and #{pane_current_path}.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.clock-mode-colour",
+          "key": "clock-mode-colour",
+          "type": "color",
+          "defaultValue": "blue",
+          "description": "Color of the clock displayed in clock mode (activated with prefix + t).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.clock-mode-style",
+          "key": "clock-mode-style",
+          "type": "enum",
+          "defaultValue": "24",
+          "description": "Display the clock in 12-hour or 24-hour format.",
+          "validValues": [
+            "12",
+            "24"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.main-pane-height",
+          "key": "main-pane-height",
+          "type": "int",
+          "defaultValue": "24",
+          "description": "Height of the main pane in the main-horizontal layout, specified in rows or as a percentage.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.main-pane-width",
+          "key": "main-pane-width",
+          "type": "int",
+          "defaultValue": "80",
+          "description": "Width of the main pane in the main-vertical layout, specified in columns or as a percentage.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.mode-keys",
+          "key": "mode-keys",
+          "type": "enum",
+          "defaultValue": "emacs",
+          "description": "Key bindings used in copy mode and choice mode. Set to 'vi' for Vim-style navigation in copy mode.",
+          "validValues": [
+            "emacs",
+            "vi"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.monitor-activity",
+          "key": "monitor-activity",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Monitor windows for activity. A window with activity is highlighted in the status bar.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.monitor-bell",
+          "key": "monitor-bell",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Monitor for bell events in each window. The window is flagged in the status bar when a bell occurs.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.pane-base-index",
+          "key": "pane-base-index",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Starting index for numbering panes within a window. Set to 1 along with base-index for consistent numbering.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-status-format",
+          "key": "window-status-format",
+          "type": "string",
+          "defaultValue": "#I:#W#{?window_flags,#{window_flags}, }",
+          "description": "Format string for inactive windows in the status bar. Supports tmux format variables.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-status-current-format",
+          "key": "window-status-current-format",
+          "type": "string",
+          "defaultValue": "#I:#W#{?window_flags,#{window_flags}, }",
+          "description": "Format string for the currently active window in the status bar. Often styled differently from inactive windows.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-style",
+          "key": "window-style",
+          "type": "string",
+          "defaultValue": "default",
+          "description": "Default style for inactive panes in the window. Can be used to dim inactive panes, e.g. 'fg=colour247,bg=colour236'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-active-style",
+          "key": "window-active-style",
+          "type": "string",
+          "defaultValue": "default",
+          "description": "Style for the active pane in the window. Used in combination with window-style to visually distinguish the focused pane.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "pane",
+      "name": "Pane Options",
+      "description": "Settings that control the display and behavior of individual panes.",
+      "parameters": [
+        {
+          "id": "pane.display-panes-time",
+          "key": "display-panes-time",
+          "type": "int",
+          "defaultValue": "1000",
+          "description": "Duration in milliseconds that pane numbers are shown when using the display-panes command (prefix + q).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.display-panes-colour",
+          "key": "display-panes-colour",
+          "type": "color",
+          "defaultValue": "blue",
+          "description": "Color used to display inactive pane numbers in the display-panes overlay.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.display-panes-active-colour",
+          "key": "display-panes-active-colour",
+          "type": "color",
+          "defaultValue": "red",
+          "description": "Color used to display the active pane number in the display-panes overlay.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.pane-border-style",
+          "key": "pane-border-style",
+          "type": "string",
+          "defaultValue": "default",
+          "description": "Style for the border of inactive panes. Accepts tmux style strings like 'fg=green' or 'fg=colour240'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.pane-active-border-style",
+          "key": "pane-active-border-style",
+          "type": "string",
+          "defaultValue": "default",
+          "description": "Style for the border of the active pane. Commonly set to a bright color to make the focused pane obvious, e.g. 'fg=green'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.pane-border-format",
+          "key": "pane-border-format",
+          "type": "string",
+          "defaultValue": "#{?pane_active,#[reverse],}#{pane_index}#[default] \"#{pane_title}\"",
+          "description": "Format string displayed in the pane border status line. Only visible when pane-border-status is enabled.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.pane-border-lines",
+          "key": "pane-border-lines",
+          "type": "enum",
+          "defaultValue": "single",
+          "description": "Type of line characters used for pane borders.",
+          "validValues": [
+            "single",
+            "double",
+            "heavy",
+            "simple",
+            "number"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pane.pane-border-status",
+          "key": "pane-border-status",
+          "type": "enum",
+          "defaultValue": "off",
+          "description": "Show a status line in the pane border. Useful for displaying pane titles or other information on top or bottom of each pane.",
+          "validValues": [
+            "off",
+            "top",
+            "bottom"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "status_bar",
+      "name": "Status Bar",
+      "description": "Settings that control the appearance and content of the status bar at the bottom (or top) of the screen.",
+      "parameters": [
+        {
+          "id": "status_bar.status-bg",
+          "key": "status-bg",
+          "type": "color",
+          "defaultValue": "green",
+          "description": "Background color of the status bar. Accepts color names, colour0-colour255, or hex values like '#ffffff'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-fg",
+          "key": "status-fg",
+          "type": "color",
+          "defaultValue": "black",
+          "description": "Foreground (text) color of the status bar.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-interval",
+          "key": "status-interval",
+          "type": "int",
+          "defaultValue": "15",
+          "description": "Interval in seconds at which the status bar is refreshed. Lower values update more frequently but use more CPU.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-justify",
+          "key": "status-justify",
+          "type": "enum",
+          "defaultValue": "left",
+          "description": "Alignment of the window list in the status bar.",
+          "validValues": [
+            "left",
+            "centre",
+            "right",
+            "absolute-centre"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-keys",
+          "key": "status-keys",
+          "type": "enum",
+          "defaultValue": "emacs",
+          "description": "Key binding style used at the status bar command prompt.",
+          "validValues": [
+            "emacs",
+            "vi"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-left",
+          "key": "status-left",
+          "type": "string",
+          "defaultValue": "[#{session_name}] ",
+          "description": "Content displayed on the left side of the status bar. Supports tmux format strings, colors, and shell commands via #().",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-left-length",
+          "key": "status-left-length",
+          "type": "int",
+          "defaultValue": "10",
+          "description": "Maximum length in characters of the left status bar component. Increase this if your left status content is being truncated.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-position",
+          "key": "status-position",
+          "type": "enum",
+          "defaultValue": "bottom",
+          "description": "Position of the status bar on screen.",
+          "validValues": [
+            "top",
+            "bottom"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-right",
+          "key": "status-right",
+          "type": "string",
+          "defaultValue": "\"#{=21:pane_title}\" %H:%M %d-%b-%y",
+          "description": "Content displayed on the right side of the status bar. Commonly used for clock, hostname, or system stats.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-right-length",
+          "key": "status-right-length",
+          "type": "int",
+          "defaultValue": "40",
+          "description": "Maximum length in characters of the right status bar component. Increase this if your right status content is being truncated.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status_bar.status-style",
+          "key": "status-style",
+          "type": "string",
+          "defaultValue": "bg=green,fg=black",
+          "description": "Style for the entire status bar. This is the preferred way to set status bar colors, replacing the older status-bg and status-fg options.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "copy_mode",
+      "name": "Copy Mode",
+      "description": "Settings that control the appearance of copy mode, used for scrolling and selecting text.",
+      "parameters": [
+        {
+          "id": "copy_mode.copy-mode-match-style",
+          "key": "copy-mode-match-style",
+          "type": "string",
+          "defaultValue": "bg=cyan,fg=black",
+          "description": "Style applied to search matches in copy mode. Helps visually identify all occurrences of the search term.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "copy_mode.copy-mode-mark-style",
+          "key": "copy-mode-mark-style",
+          "type": "string",
+          "defaultValue": "bg=magenta,fg=black",
+          "description": "Style applied to the marked position in copy mode when using the mark command.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "copy_mode.copy-mode-current-match-style",
+          "key": "copy-mode-current-match-style",
+          "type": "string",
+          "defaultValue": "bg=yellow,fg=black",
+          "description": "Style applied to the currently selected search match in copy mode, distinguishing it from other matches.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

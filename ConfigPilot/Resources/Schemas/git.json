@@ -1,0 +1,1164 @@
+{
+  "tool": {
+    "id": "git",
+    "name": "Git",
+    "category": "CLI Tools",
+    "configPaths": ["~/.gitconfig", "~/.config/git/config"],
+    "configFormat": "ini",
+    "iconName": "arrow.triangle.branch"
+  },
+  "sections": [
+    {
+      "id": "core",
+      "name": "Core Settings",
+      "description": "Fundamental Git behavior settings that affect most operations.",
+      "parameters": [
+        {
+          "id": "core.editor",
+          "key": "editor",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The text editor Git opens for commit messages, interactive rebase, and other editing tasks. Falls back to the VISUAL or EDITOR environment variable if unset. Common values include 'vim', 'nano', 'code --wait', or 'subl -n -w'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.pager",
+          "key": "pager",
+          "type": "string",
+          "defaultValue": "less",
+          "description": "The pager program used to display output from commands like log, diff, and show. Set to an empty string or 'cat' to disable paging entirely. Popular alternatives include 'delta', 'diff-so-fancy', and 'less -FRX'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.autocrlf",
+          "key": "autocrlf",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Controls automatic line ending conversion between the working directory and the repository. Set to 'true' on Windows to convert LF to CRLF on checkout and back on commit. Set to 'input' on macOS/Linux to convert CRLF to LF on commit but leave checkouts unchanged.",
+          "validValues": ["true", "false", "input"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.safecrlf",
+          "key": "safecrlf",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Controls whether Git should reject files that would undergo irreversible line ending conversion. Set to 'true' to abort if a conversion would be lossy, or 'warn' to print a warning without aborting.",
+          "validValues": ["true", "false", "warn"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.eol",
+          "key": "eol",
+          "type": "enum",
+          "defaultValue": "native",
+          "description": "Sets the line ending type Git uses when writing files to the working directory. 'native' uses the OS default (CRLF on Windows, LF elsewhere). Override this to enforce consistent line endings across platforms.",
+          "validValues": ["lf", "crlf", "native"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.whitespace",
+          "key": "whitespace",
+          "type": "string",
+          "defaultValue": "blank-at-eol,blank-at-eof,space-before-tab",
+          "description": "Comma-separated list of whitespace problems Git should detect. Used by diff highlighting and apply --whitespace. Common values include 'trailing-space', 'space-before-tab', 'indent-with-non-tab', and 'tab-in-indent'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.filemode",
+          "key": "filemode",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Whether Git tracks the executable bit of files. Set to false on filesystems that do not support execute permissions (such as FAT or mounted network drives) to avoid spurious permission-change diffs.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.ignorecase",
+          "key": "ignorecase",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When true, Git treats file paths as case-insensitive. Automatically set to true on case-insensitive filesystems like macOS HFS+ and Windows NTFS. Changing this manually can cause problems; let Git detect it.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.compression",
+          "key": "compression",
+          "type": "int",
+          "defaultValue": "-1",
+          "description": "Sets the zlib compression level for objects in the repository. Ranges from 0 (no compression) to 9 (maximum compression). The default -1 uses zlib's default (level 6). Lower values speed up operations at the cost of larger repository size.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.bigFileThreshold",
+          "key": "bigFileThreshold",
+          "type": "string",
+          "defaultValue": "512m",
+          "description": "Files larger than this threshold are stored whole without delta compression. Increase this for repositories with large binary files that benefit from delta compression, or decrease it to speed up operations on repos with many large files.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.preloadindex",
+          "key": "preloadindex",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Enables parallel index preloading to speed up operations like git status and git diff. Improves performance on multi-core machines, especially with large repositories on slow filesystems.",
+          "validValues": null,
+          "since": "2.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.fscache",
+          "key": "fscache",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Enables a filesystem cache that reduces the number of system calls for status and diff operations on Windows. Provides significant performance improvements on NTFS. Only relevant on Windows; ignored on other platforms.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.symlinks",
+          "key": "symlinks",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Whether Git creates symbolic links when checking out files that are recorded as symlinks. Set to false on systems that do not support symlinks, in which case Git creates plain files containing the link text instead.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.abbrev",
+          "key": "abbrev",
+          "type": "int",
+          "defaultValue": null,
+          "description": "Sets the minimum length of abbreviated object hashes displayed by Git. The default is dynamically chosen based on the number of objects in the repository (typically 7-12 characters). Increase this for very large repositories to avoid ambiguous hashes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.quotePath",
+          "key": "quotePath",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "When true, Git quotes unusual characters in file paths using C-style escaping. Set to false to display non-ASCII characters (such as accented or CJK characters) literally in file names instead of octal escape sequences.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.trustctime",
+          "key": "trustctime",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Whether Git trusts the ctime (inode change time) field from the filesystem. Set to false on systems where ctime is unreliable (such as some backup tools or network filesystems) to prevent false-positive change detection.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.untrackedCache",
+          "key": "untrackedCache",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enables caching of untracked file information in the index to speed up git status. Useful for large repositories where scanning the working directory is slow. Requires the filesystem to reliably update directory mtimes.",
+          "validValues": null,
+          "since": "2.8.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.fsmonitor",
+          "key": "fsmonitor",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Path to a filesystem monitor hook script or the built-in 'true' value to enable Git's built-in FSMonitor daemon. Dramatically speeds up git status and other index-dependent commands in large repositories by watching for file changes instead of scanning the entire tree.",
+          "validValues": null,
+          "since": "2.16.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.commentChar",
+          "key": "commentChar",
+          "type": "string",
+          "defaultValue": "#",
+          "description": "The character used to mark comment lines in commit messages and interactive rebase todo lists. Change this if your commit messages frequently start with '#', for example to ';' or 'auto' (which picks an unused character automatically).",
+          "validValues": null,
+          "since": "1.8.2",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.hooksPath",
+          "key": "hooksPath",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Overrides the default hooks directory ($GIT_DIR/hooks) with a custom path. Useful for sharing hooks across repositories by pointing to a central directory, or for using tools that manage Git hooks globally.",
+          "validValues": null,
+          "since": "2.9.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.excludesFile",
+          "key": "excludesFile",
+          "type": "path",
+          "defaultValue": "$XDG_CONFIG_HOME/git/ignore",
+          "description": "Path to a file containing global ignore patterns that apply to all repositories. Useful for ignoring OS-specific files (.DS_Store, Thumbs.db) and editor temporary files without polluting each project's .gitignore.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.attributesFile",
+          "key": "attributesFile",
+          "type": "path",
+          "defaultValue": "$XDG_CONFIG_HOME/git/attributes",
+          "description": "Path to a file containing global gitattributes rules that apply to all repositories. Useful for setting up diff drivers, merge strategies, or line ending rules that should be consistent across all your projects.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.longpaths",
+          "key": "longpaths",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enables support for file paths longer than 260 characters on Windows. Required when working with deeply nested directory structures or projects with very long file names, such as some Node.js dependency trees.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.protectNTFS",
+          "key": "protectNTFS",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Prevents Git from checking out files with names that are reserved or problematic on NTFS, such as names containing colons or trailing dots. Protects against repository attacks that exploit NTFS filesystem quirks.",
+          "validValues": null,
+          "since": "2.2.1",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.sparseCheckout",
+          "key": "sparseCheckout",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enables sparse checkout mode, which allows you to check out only a subset of files from the repository. Useful for very large monorepos where you only need to work on a small portion of the codebase.",
+          "validValues": null,
+          "since": "1.7.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.sparseCheckoutCone",
+          "key": "sparseCheckoutCone",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "When sparse checkout is enabled, uses the more efficient cone mode that restricts patterns to directory-based matching. Cone mode is faster than the general sparse checkout because it uses a simpler pattern format.",
+          "validValues": null,
+          "since": "2.25.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "user",
+      "name": "User Identity",
+      "description": "Your name and email address used in commit metadata.",
+      "parameters": [
+        {
+          "id": "user.name",
+          "key": "name",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Your full name as it will appear in commit author and committer fields. This is recorded permanently in every commit you make and is visible in the project history.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "user.email",
+          "key": "email",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Your email address as it will appear in commit metadata. Use the email associated with your Git hosting account (GitHub, GitLab, etc.) so commits are properly attributed to your profile. You can set per-repository overrides for work vs. personal projects.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "user.signingkey",
+          "key": "signingkey",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The GPG or SSH key ID used to sign commits and tags. For GPG, this is typically the key fingerprint or email. For SSH signing (Git 2.34+), prefix with 'key::' followed by the public key. Used with commit.gpgSign and tag.gpgSign.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "init",
+      "name": "Repository Initialization",
+      "description": "Settings that control how new repositories are created.",
+      "parameters": [
+        {
+          "id": "init.defaultBranch",
+          "key": "defaultBranch",
+          "type": "string",
+          "defaultValue": "master",
+          "description": "The name of the initial branch created when running git init. Most teams now set this to 'main'. GitHub, GitLab, and Bitbucket all default to 'main' for new repositories.",
+          "validValues": null,
+          "since": "2.28.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "init.templateDir",
+          "key": "templateDir",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Path to a directory whose contents are copied into the .git directory of every newly created repository. Useful for providing default hooks, exclude patterns, or other boilerplate to all new repositories.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "push",
+      "name": "Push Behavior",
+      "description": "Settings that control how git push sends changes to remote repositories.",
+      "parameters": [
+        {
+          "id": "push.default",
+          "key": "default",
+          "type": "enum",
+          "defaultValue": "simple",
+          "description": "Controls which branches are pushed when no refspec is given. 'simple' pushes the current branch to its upstream if the names match (safest). 'current' pushes to a same-named branch on the remote. 'matching' pushes all branches with matching remote names.",
+          "validValues": ["nothing", "current", "upstream", "tracking", "simple", "matching"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "push.autoSetupRemote",
+          "key": "autoSetupRemote",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically sets up tracking between the local branch and the remote branch on the first push. Eliminates the need for 'git push --set-upstream origin branch-name' when pushing a new branch for the first time.",
+          "validValues": null,
+          "since": "2.37.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "push.followTags",
+          "key": "followTags",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically pushes annotated tags that point to commits being pushed, without requiring a separate 'git push --tags'. Useful for workflows where tags mark releases and should travel with the commits they annotate.",
+          "validValues": null,
+          "since": "1.8.3",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "push.gpgSign",
+          "key": "gpgSign",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Controls whether pushes are signed with GPG. Requires the remote server to support signed pushes. 'true' always signs, 'false' never signs, 'if-asked' signs only when the server requests it.",
+          "validValues": ["true", "false", "if-asked"],
+          "since": "2.2.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "push.recurseSubmodules",
+          "key": "recurseSubmodules",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Controls whether submodule changes are pushed before the superproject. 'check' aborts the push if submodule commits have not been pushed. 'on-demand' automatically pushes changed submodules first. Prevents broken submodule references on the remote.",
+          "validValues": ["check", "on-demand", "no"],
+          "since": "1.7.11",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "pull",
+      "name": "Pull Behavior",
+      "description": "Settings that control how git pull integrates remote changes.",
+      "parameters": [
+        {
+          "id": "pull.rebase",
+          "key": "rebase",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "When true, git pull rebases local commits on top of the fetched branch instead of creating a merge commit. Produces a cleaner linear history. Set to 'interactive' to use interactive rebase, or 'merges' to preserve local merge commits during rebase.",
+          "validValues": ["true", "false", "interactive", "merges"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "pull.ff",
+          "key": "ff",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Controls fast-forward behavior during pull. 'only' refuses to pull if a fast-forward is not possible, preventing accidental merge commits. 'false' always creates a merge commit even when fast-forward is possible.",
+          "validValues": ["true", "false", "only"],
+          "since": "2.29.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "fetch",
+      "name": "Fetch Behavior",
+      "description": "Settings that control how git fetch retrieves data from remotes.",
+      "parameters": [
+        {
+          "id": "fetch.prune",
+          "key": "prune",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically removes remote-tracking references that no longer exist on the remote during fetch. Keeps your list of remote branches clean by deleting stale entries. Equivalent to running 'git fetch --prune' every time.",
+          "validValues": null,
+          "since": "1.8.5",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "fetch.pruneTags",
+          "key": "pruneTags",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically removes local tags that no longer exist on the remote during fetch. Useful when tags are frequently rewritten or deleted on the remote, but should be used carefully since tags are normally considered immutable.",
+          "validValues": null,
+          "since": "2.17.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "fetch.parallel",
+          "key": "parallel",
+          "type": "int",
+          "defaultValue": "1",
+          "description": "Number of submodules to fetch in parallel. Set to 0 to use a reasonable default based on the number of CPUs. Higher values speed up fetching in repositories with many submodules at the cost of increased network connections.",
+          "validValues": null,
+          "since": "2.26.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "merge",
+      "name": "Merge Behavior",
+      "description": "Settings that control how Git merges branches.",
+      "parameters": [
+        {
+          "id": "merge.ff",
+          "key": "ff",
+          "type": "enum",
+          "defaultValue": "true",
+          "description": "Controls fast-forward behavior during merge. 'true' allows fast-forward when possible. 'false' always creates a merge commit even for fast-forward merges, preserving branch topology. 'only' refuses to merge unless fast-forward is possible.",
+          "validValues": ["true", "false", "only"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "merge.conflictStyle",
+          "key": "conflictStyle",
+          "type": "enum",
+          "defaultValue": "merge",
+          "description": "Format of conflict markers in files. 'merge' shows the standard two-way markers. 'diff3' adds a third section showing the common ancestor, making it much easier to understand the intent of both sides. 'zdiff3' is an improved version that trims common lines from the ancestor.",
+          "validValues": ["merge", "diff3", "zdiff3"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "merge.tool",
+          "key": "tool",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The merge tool to launch when running 'git mergetool'. Common values include 'vimdiff', 'opendiff' (macOS FileMerge), 'meld', 'kdiff3', and 'vscode'. The tool must be configured or be one of the built-in supported tools.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "merge.autoStash",
+          "key": "autoStash",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically stashes uncommitted changes before a merge and restores them afterward. Allows you to merge even with a dirty working directory without manually running git stash.",
+          "validValues": null,
+          "since": "2.9.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "merge.log",
+          "key": "log",
+          "type": "int",
+          "defaultValue": "false",
+          "description": "Includes a shortlog of at most the specified number of commits from the merged branch in the merge commit message. Set to true (or a number like 20) to provide context about what was merged. Helpful for understanding merge commits later.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "rebase",
+      "name": "Rebase Behavior",
+      "description": "Settings that control how git rebase rewrites commit history.",
+      "parameters": [
+        {
+          "id": "rebase.autoSquash",
+          "key": "autoSquash",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically reorders and marks commits for squash or fixup during interactive rebase when their messages start with 'squash!' or 'fixup!'. Works with 'git commit --fixup' to streamline cleaning up commit history before merging.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "rebase.autoStash",
+          "key": "autoStash",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically stashes uncommitted changes before a rebase and restores them afterward. Eliminates the 'cannot rebase: you have unstaged changes' error by transparently handling the stash cycle.",
+          "validValues": null,
+          "since": "2.6.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "rebase.stat",
+          "key": "stat",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Shows a diffstat of changes since the last rebase when the rebase completes. Provides a quick overview of what changed during the rebase operation.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "rebase.updateRefs",
+          "key": "updateRefs",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically updates branches that point to commits being rebased, keeping dependent branch chains in sync. Extremely useful for stacked branch workflows where multiple branches build on each other.",
+          "validValues": null,
+          "since": "2.38.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "rebase.missingCommitsCheck",
+          "key": "missingCommitsCheck",
+          "type": "enum",
+          "defaultValue": "ignore",
+          "description": "Controls whether interactive rebase warns or aborts if commits are removed from the todo list. 'warn' prints a warning, 'error' aborts the rebase. Helps prevent accidental commit deletion during interactive rebase.",
+          "validValues": ["ignore", "warn", "error"],
+          "since": "2.6.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "diff",
+      "name": "Diff Display",
+      "description": "Settings that control how diffs are generated and displayed.",
+      "parameters": [
+        {
+          "id": "diff.tool",
+          "key": "tool",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The external diff tool to launch when running 'git difftool'. Common choices include 'vimdiff', 'opendiff', 'meld', 'Beyond Compare', and 'vscode'. Must be a recognized tool or configured via difftool.<name>.cmd.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.algorithm",
+          "key": "algorithm",
+          "type": "enum",
+          "defaultValue": "myers",
+          "description": "The diff algorithm used to compute changes. 'patience' and 'histogram' often produce more readable diffs than the default 'myers', especially for code with many similar lines. 'histogram' is generally the best choice for source code.",
+          "validValues": ["myers", "minimal", "patience", "histogram"],
+          "since": "1.8.2",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.colorMoved",
+          "key": "colorMoved",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Highlights lines that were moved from one location to another in a different color from added/removed lines. Makes it much easier to see code reorganization in diffs. 'default' or 'zebra' are good starting choices.",
+          "validValues": ["no", "default", "plain", "blocks", "zebra", "dimmed-zebra"],
+          "since": "2.15.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.colorMovedWS",
+          "key": "colorMovedWS",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Controls how whitespace changes affect moved-line detection. 'ignore-all-space' is useful to detect moves even when indentation changes, such as when moving code into or out of a block.",
+          "validValues": ["no", "ignore-space-at-eol", "ignore-space-change", "ignore-all-space", "allow-indentation-change"],
+          "since": "2.15.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.mnemonicPrefix",
+          "key": "mnemonicPrefix",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Replaces the standard 'a/' and 'b/' diff prefixes with more descriptive ones: 'i/' for index, 'w/' for working directory, 'c/' for commit, and 'o/' for object. Makes it clearer which version of the file is being shown.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.renames",
+          "key": "renames",
+          "type": "enum",
+          "defaultValue": "true",
+          "description": "Controls rename detection in diffs. 'true' detects renames, 'copies' also detects copies. Rename detection shows moved files as renames rather than a full delete-and-add, producing much more readable diffs.",
+          "validValues": ["true", "false", "copies"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.renameLimit",
+          "key": "renameLimit",
+          "type": "int",
+          "defaultValue": "1000",
+          "description": "The maximum number of files to consider when detecting renames and copies. Increase this if Git misses renames in large commits. Higher values use more memory and CPU time during diff computation.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.submodule",
+          "key": "submodule",
+          "type": "enum",
+          "defaultValue": "short",
+          "description": "Controls how submodule changes appear in diffs. 'short' shows just the commit hash range. 'log' shows a list of commits in the submodule change. 'diff' shows the full diff of changes within the submodule.",
+          "validValues": ["short", "log", "diff"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.context",
+          "key": "context",
+          "type": "int",
+          "defaultValue": "3",
+          "description": "The number of lines of unchanged context shown around each change in a diff. Increase this to see more surrounding code for better understanding, or decrease it to make diffs more compact.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.interHunkContext",
+          "key": "interHunkContext",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "The maximum number of lines between two hunks that will cause them to be merged into a single hunk. Increasing this produces fewer but larger hunks, which can be easier to read when changes are close together.",
+          "validValues": null,
+          "since": "2.10.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "diff.noprefix",
+          "key": "noprefix",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When true, removes the 'a/' and 'b/' source and destination prefixes from diff output. Makes file paths in diffs directly usable for copy-paste but may confuse tools that expect standard unified diff format.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "name": "Color Output",
+      "description": "Settings that control colored output in Git commands.",
+      "parameters": [
+        {
+          "id": "color.ui",
+          "key": "ui",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Master switch for colored output. 'auto' enables color when outputting to a terminal and disables it when piping to another program. 'always' forces color even in pipes (useful with pagers like less -R). 'never' disables all color.",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "color.branch",
+          "key": "branch",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls colored output for the git branch command. Set to 'always' to force colors even when piping output, or 'never' to disable branch coloring while keeping other colors enabled.",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "color.diff",
+          "key": "diff",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls colored output for git diff and related commands. When enabled, additions appear in green and deletions in red. Can be overridden per-slot (e.g., color.diff.meta, color.diff.frag).",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "color.status",
+          "key": "status",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls colored output for git status. Helps distinguish staged changes, unstaged changes, and untracked files through different colors.",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "color.showBranch",
+          "key": "showBranch",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls colored output for the git show-branch command. Each branch gets a distinct color to help visually distinguish commit ownership across branches.",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "color.interactive",
+          "key": "interactive",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls colored output for interactive commands like git add --interactive and git clean --interactive. Colors highlight prompts and choices to improve readability.",
+          "validValues": ["auto", "always", "never"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "credential",
+      "name": "Credential Storage",
+      "description": "Settings that control how Git stores and retrieves authentication credentials.",
+      "parameters": [
+        {
+          "id": "credential.helper",
+          "key": "helper",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The credential helper used to store and retrieve passwords. 'osxkeychain' uses the macOS Keychain, 'manager' uses Git Credential Manager (Windows/macOS/Linux), 'store' saves to a plaintext file, and 'cache --timeout=3600' caches in memory for an hour.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "commit",
+      "name": "Commit Behavior",
+      "description": "Settings that control how commits are created.",
+      "parameters": [
+        {
+          "id": "commit.gpgSign",
+          "key": "gpgSign",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically signs all commits with your GPG or SSH key (configured in user.signingkey). Required by some organizations and platforms for verified commits. Produces a 'Verified' badge on GitHub and GitLab.",
+          "validValues": null,
+          "since": "2.0.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "commit.verbose",
+          "key": "verbose",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Includes the full diff of staged changes at the bottom of the commit message editor. Helps you review exactly what you are committing while writing the commit message, without needing a separate terminal.",
+          "validValues": null,
+          "since": "2.9.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "commit.template",
+          "key": "template",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Path to a file used as the starting template for commit messages. Useful for enforcing a consistent commit message format across a team, such as including ticket numbers, categories, or checklists.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "tag",
+      "name": "Tag Behavior",
+      "description": "Settings that control how tags are created and displayed.",
+      "parameters": [
+        {
+          "id": "tag.gpgSign",
+          "key": "gpgSign",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically signs all annotated tags with your GPG or SSH key. Signed tags provide cryptographic proof that the tag was created by the claimed author, which is important for verifying release integrity.",
+          "validValues": null,
+          "since": "2.23.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "tag.sort",
+          "key": "sort",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The sort order for tags listed by git tag. Set to 'version:refname' to sort tags as version numbers (so v2.10 comes after v2.9, not before v2.2). Use '-version:refname' for reverse version order (newest first).",
+          "validValues": null,
+          "since": "2.0.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "name": "Status Display",
+      "description": "Settings that control the output of git status.",
+      "parameters": [
+        {
+          "id": "status.showUntrackedFiles",
+          "key": "showUntrackedFiles",
+          "type": "enum",
+          "defaultValue": "normal",
+          "description": "Controls how untracked files are shown in git status. 'no' hides them entirely, 'normal' shows untracked directories, and 'all' shows individual files inside untracked directories. 'all' is slower but more detailed.",
+          "validValues": ["no", "normal", "all"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status.short",
+          "key": "short",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Uses the short format for git status output by default, showing compact two-letter status codes instead of verbose descriptions. Equivalent to always running 'git status --short'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status.branch",
+          "key": "branch",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Shows branch and tracking information in the short-format status output. Displays the current branch name and how many commits ahead or behind the tracking branch you are.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "status.showStash",
+          "key": "showStash",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Shows the number of stash entries at the bottom of git status output. Useful as a reminder that you have stashed changes, which is easy to forget about.",
+          "validValues": null,
+          "since": "2.16.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "log",
+      "name": "Log Display",
+      "description": "Settings that control the output of git log.",
+      "parameters": [
+        {
+          "id": "log.date",
+          "key": "date",
+          "type": "enum",
+          "defaultValue": "default",
+          "description": "The date format used in git log output. 'relative' shows '2 hours ago', 'short' shows '2024-01-15', 'iso' shows full ISO 8601 timestamps, and 'human' adjusts format based on how recent the date is.",
+          "validValues": ["relative", "local", "default", "iso", "iso-strict", "rfc", "short", "raw", "human", "unix"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "log.decorate",
+          "key": "decorate",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls whether ref names (branch names, tags) are shown next to commits in log output. 'short' shows ref names without the full refs/heads/ prefix. 'full' shows the complete ref path. 'auto' decorates when outputting to a terminal.",
+          "validValues": ["auto", "short", "full", "no"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "log.abbrevCommit",
+          "key": "abbrevCommit",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Shows abbreviated commit hashes instead of the full 40-character SHA-1 in log output. The abbreviated length is determined by core.abbrev. Makes log output more compact and readable.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "log.follow",
+          "key": "follow",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically follows file renames when showing the log for a single file. Without this, the history stops at the point where the file was renamed. Only works when a single file path is given.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "log.showSignature",
+          "key": "showSignature",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Shows GPG signature verification status for each commit in log output. Displays whether commits were signed and if the signature is valid, helping verify the authenticity of commits.",
+          "validValues": null,
+          "since": "1.7.9",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "log.mailmap",
+          "key": "mailmap",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Uses the mailmap file to canonicalize author and committer names and email addresses in log output. Consolidates entries from people who have used multiple email addresses or name spellings over time.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "advice",
+      "name": "Advice Messages",
+      "description": "Settings that control helpful hint messages shown by Git commands.",
+      "parameters": [
+        {
+          "id": "advice.pushNonFastForward",
+          "key": "pushNonFastForward",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Shows a detailed hint message when a push is rejected because it is not a fast-forward. The hint explains how to resolve the situation. Disable this once you are comfortable with Git's push model.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advice.detachedHead",
+          "key": "detachedHead",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Shows a warning and explanation when you check out a commit instead of a branch, entering detached HEAD state. Disable this if you frequently work in detached HEAD state intentionally.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advice.statusHints",
+          "key": "statusHints",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Shows instructional hints in git status output explaining how to stage, unstage, and discard changes. Useful for beginners but adds visual noise for experienced users.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "url",
+      "name": "URL Rewriting",
+      "description": "Settings for rewriting repository URLs, often used to prefer SSH over HTTPS.",
+      "parameters": [
+        {
+          "id": "url.ssh://git@github.com/.insteadOf",
+          "key": "insteadOf",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Rewrites repository URLs that match a given prefix. Commonly used to transparently replace HTTPS URLs with SSH, for example setting url.'git@github.com:'.insteadOf to 'https://github.com/' so all GitHub operations use SSH authentication.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "name": "Transfer Settings",
+      "description": "Settings that control data transfer between repositories.",
+      "parameters": [
+        {
+          "id": "transfer.fsckObjects",
+          "key": "fsckObjects",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Validates all objects received during fetch and push by running fsck checks. Catches corrupted or malicious objects before they enter your repository. Adds overhead to transfers but improves repository integrity, especially for servers.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "protocol",
+      "name": "Protocol Settings",
+      "description": "Settings that control the wire protocol used for Git operations.",
+      "parameters": [
+        {
+          "id": "protocol.version",
+          "key": "version",
+          "type": "enum",
+          "defaultValue": "2",
+          "description": "The Git wire protocol version to use for communication with remotes. Version 2 is more efficient, supporting server-side filtering and faster negotiation. Version 0 and 1 are the legacy protocols. Version 2 is the default since Git 2.26.",
+          "validValues": ["0", "1", "2"],
+          "since": "2.18.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "rerere",
+      "name": "Reuse Recorded Resolution",
+      "description": "Settings for automatically reusing previously recorded conflict resolutions.",
+      "parameters": [
+        {
+          "id": "rerere.enabled",
+          "key": "enabled",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enables recording of merge conflict resolutions so they can be automatically reapplied if the same conflict occurs again. Extremely useful when you repeatedly rebase or merge branches that produce the same conflicts.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "rerere.autoUpdate",
+          "key": "autoUpdate",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically stages files after rerere resolves conflicts, so you do not need to manually add them. Without this, rerere resolves the conflict in the file but leaves it unstaged for you to review first.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

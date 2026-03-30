@@ -1,0 +1,110 @@
+{
+  "tool": {
+    "id": "git",
+    "name": "Git",
+    "category": "CLI Tools",
+    "configPaths": ["~/.gitconfig"],
+    "configFormat": "ini",
+    "iconName": "arrow.triangle.branch"
+  },
+  "sections": [
+    {
+      "id": "core",
+      "name": "Core Settings",
+      "description": "Fundamental Git behavior settings",
+      "parameters": [
+        {
+          "id": "core.autocrlf",
+          "key": "autocrlf",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Controls automatic line ending conversion.",
+          "validValues": ["true", "false", "input"],
+          "since": "1.5.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.editor",
+          "key": "editor",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The editor used for commit messages.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "core.whitespace",
+          "key": "whitespace",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Whitespace handling mode.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "user",
+      "name": "User Identity",
+      "description": "User information for commits",
+      "parameters": [
+        {
+          "id": "user.name",
+          "key": "name",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Your full name for commit attribution.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "user.email",
+          "key": "email",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Your email for commit attribution.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "push",
+      "name": "Push Settings",
+      "description": "Push behavior configuration",
+      "parameters": [
+        {
+          "id": "push.default",
+          "key": "default",
+          "type": "enum",
+          "defaultValue": "simple",
+          "description": "Default push behavior.",
+          "validValues": ["nothing", "current", "upstream", "simple", "matching"],
+          "since": "1.7.11",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "push.autoSetupRemote",
+          "key": "autoSetupRemote",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically set up remote tracking.",
+          "validValues": null,
+          "since": "2.37.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

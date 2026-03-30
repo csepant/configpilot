@@ -1,0 +1,605 @@
+{
+  "tool": {
+    "id": "alacritty",
+    "name": "Alacritty",
+    "category": "Dev Tools",
+    "configPaths": [
+      "~/.config/alacritty/alacritty.toml",
+      "~/.alacritty.toml"
+    ],
+    "configFormat": "toml",
+    "iconName": "rectangle.on.rectangle"
+  },
+  "sections": [
+    {
+      "id": "window",
+      "name": "Window",
+      "description": "Settings that control the appearance and behavior of the Alacritty window.",
+      "parameters": [
+        {
+          "id": "window.decorations",
+          "key": "window.decorations",
+          "type": "enum",
+          "defaultValue": "Full",
+          "description": "Controls the window title bar and borders. Use Full for standard system decorations, None to remove all chrome, Transparent for a titlebar with transparent background, or Buttonless to hide title bar buttons.",
+          "validValues": [
+            "Full",
+            "None",
+            "Transparent",
+            "Buttonless"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.dynamic_padding",
+          "key": "window.dynamic_padding",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, distributes extra padding evenly around the terminal content rather than only adding it to the right and bottom edges.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.dynamic_title",
+          "key": "window.dynamic_title",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Allow the terminal to update the window title via escape sequences. When disabled, the title stays fixed to the value set in window.title.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.opacity",
+          "key": "window.opacity",
+          "type": "float",
+          "defaultValue": "1.0",
+          "description": "Background opacity of the window as a floating-point number from 0.0 (fully transparent) to 1.0 (fully opaque).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.blur",
+          "key": "window.blur",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Request the compositor to blur the background behind the translucent terminal window. Requires a compositor that supports background blur and opacity less than 1.0.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.startup_mode",
+          "key": "window.startup_mode",
+          "type": "enum",
+          "defaultValue": "Windowed",
+          "description": "Determines the initial window mode when Alacritty launches.",
+          "validValues": [
+            "Windowed",
+            "Maximized",
+            "Fullscreen",
+            "SimpleFullscreen"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.title",
+          "key": "window.title",
+          "type": "string",
+          "defaultValue": "Alacritty",
+          "description": "The default title shown in the window title bar. Can be overridden by shell escape sequences unless dynamic_title is disabled.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.option_as_alt",
+          "key": "window.option_as_alt",
+          "type": "enum",
+          "defaultValue": "None",
+          "description": "On macOS, controls whether the Option key is treated as Alt for sending escape sequences. OnlyLeft and OnlyRight apply only to the respective Option key.",
+          "validValues": [
+            "None",
+            "OnlyLeft",
+            "OnlyRight",
+            "Both"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.resize_increments",
+          "key": "window.resize_increments",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, the window resizes in discrete steps equal to the cell size rather than pixel-by-pixel.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.padding.x",
+          "key": "window.padding.x",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Horizontal padding in pixels added on both the left and right sides of the terminal content.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.padding.y",
+          "key": "window.padding.y",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Vertical padding in pixels added on both the top and bottom of the terminal content.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.dimensions.columns",
+          "key": "window.dimensions.columns",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Initial number of columns in the terminal grid. A value of 0 lets the window manager decide the width.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.dimensions.lines",
+          "key": "window.dimensions.lines",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Initial number of lines (rows) in the terminal grid. A value of 0 lets the window manager decide the height.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "font",
+      "name": "Font",
+      "description": "Font rendering options including typeface selection, sizing, and glyph offsets.",
+      "parameters": [
+        {
+          "id": "font.normal.family",
+          "key": "font.normal.family",
+          "type": "string",
+          "defaultValue": "monospace",
+          "description": "Font family name for the regular (normal weight, non-italic) variant. Must be a font installed on the system.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.normal.style",
+          "key": "font.normal.style",
+          "type": "string",
+          "defaultValue": "Regular",
+          "description": "Font style string for the normal variant, such as Regular, Medium, or Light. Must match an available style in the chosen font family.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.bold.family",
+          "key": "font.bold.family",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family for bold text. Defaults to the normal font family when not set.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.bold.style",
+          "key": "font.bold.style",
+          "type": "string",
+          "defaultValue": "Bold",
+          "description": "Font style string for the bold variant. Must match an available style in the bold font family.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.italic.family",
+          "key": "font.italic.family",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family for italic text. Defaults to the normal font family when not set.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.italic.style",
+          "key": "font.italic.style",
+          "type": "string",
+          "defaultValue": "Italic",
+          "description": "Font style string for the italic variant. Must match an available style in the italic font family.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.size",
+          "key": "font.size",
+          "type": "float",
+          "defaultValue": "11.25",
+          "description": "Font size in points. On macOS this refers to the actual rendered size; on other platforms it may vary depending on DPI settings.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.offset.x",
+          "key": "font.offset.x",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Extra horizontal spacing in pixels added to each character. Positive values increase letter spacing; negative values tighten it.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.offset.y",
+          "key": "font.offset.y",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Extra vertical spacing in pixels added to each line. Positive values increase line height; negative values decrease it.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.builtin_box_drawing",
+          "key": "font.builtin_box_drawing",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "When enabled, Alacritty renders box-drawing and block-element characters using its own built-in glyphs instead of the font, ensuring pixel-perfect alignment.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "name": "Colors",
+      "description": "Color settings for the terminal foreground, background, cursor, and selections.",
+      "parameters": [
+        {
+          "id": "colors.primary.background",
+          "key": "colors.primary.background",
+          "type": "color",
+          "defaultValue": "#1d1f21",
+          "description": "Background color of the terminal. Accepts a hex color string prefixed with #.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.primary.foreground",
+          "key": "colors.primary.foreground",
+          "type": "color",
+          "defaultValue": "#c5c8c6",
+          "description": "Default foreground color for text. Accepts a hex color string prefixed with #.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.cursor.cursor",
+          "key": "colors.cursor.cursor",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Color of the terminal cursor. When not set, the cursor uses the inverted foreground color.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.cursor.text",
+          "key": "colors.cursor.text",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Color of the text rendered under the cursor. When not set, it uses the inverted background color.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.selection.background",
+          "key": "colors.selection.background",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Background color of selected text. When not set, the selection uses the inverted cell colors.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.selection.text",
+          "key": "colors.selection.text",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Foreground color of selected text. When not set, the selection uses the inverted cell colors.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "colors.draw_bold_text_with_bright_colors",
+          "key": "colors.draw_bold_text_with_bright_colors",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, bold text is rendered using the bright variant of the current ANSI color instead of the normal variant.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "description": "Settings that control the terminal cursor appearance and blink behavior.",
+      "parameters": [
+        {
+          "id": "cursor.style.shape",
+          "key": "cursor.style.shape",
+          "type": "enum",
+          "defaultValue": "Block",
+          "description": "The shape of the terminal cursor when the window is focused.",
+          "validValues": [
+            "Block",
+            "Underline",
+            "Beam"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "cursor.style.blinking",
+          "key": "cursor.style.blinking",
+          "type": "enum",
+          "defaultValue": "Off",
+          "description": "Controls cursor blinking. Off disables blinking, On enables it permanently, and Always blinks regardless of terminal escape sequences.",
+          "validValues": [
+            "Off",
+            "On",
+            "Always"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "cursor.blink_interval",
+          "key": "cursor.blink_interval",
+          "type": "int",
+          "defaultValue": "750",
+          "description": "Time in milliseconds between cursor blink state changes. Only applies when cursor blinking is enabled.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "cursor.blink_timeout",
+          "key": "cursor.blink_timeout",
+          "type": "int",
+          "defaultValue": "5",
+          "description": "Number of seconds of keyboard inactivity before cursor blinking stops. Set to 0 to disable the timeout so the cursor blinks indefinitely.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "cursor.unfocused_hollow",
+          "key": "cursor.unfocused_hollow",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "When enabled, the cursor is drawn as a hollow rectangle when the terminal window loses focus.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "cursor.thickness",
+          "key": "cursor.thickness",
+          "type": "float",
+          "defaultValue": "0.15",
+          "description": "Thickness of the cursor relative to the cell width, used for Beam and Underline cursor shapes. Ranges from 0.0 to 1.0.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "scrolling",
+      "name": "Scrolling",
+      "description": "Options for scrollback history size and scroll speed.",
+      "parameters": [
+        {
+          "id": "scrolling.history",
+          "key": "scrolling.history",
+          "type": "int",
+          "defaultValue": "10000",
+          "description": "Maximum number of lines stored in the scrollback buffer. Set to 0 to disable scrollback entirely.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "scrolling.multiplier",
+          "key": "scrolling.multiplier",
+          "type": "int",
+          "defaultValue": "3",
+          "description": "Number of lines scrolled per scroll wheel increment. Higher values make scrolling faster.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "description": "Shell program and terminal behavior configuration.",
+      "parameters": [
+        {
+          "id": "terminal.shell.program",
+          "key": "terminal.shell.program",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Absolute path to the shell executable launched when Alacritty starts. When not set, the shell is read from the SHELL environment variable or /etc/passwd.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "terminal.shell.args",
+          "key": "terminal.shell.args",
+          "type": "list",
+          "defaultValue": "[]",
+          "description": "List of arguments passed to the shell program on startup. For example, [\"-l\"] starts the shell as a login shell.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "terminal.osc52",
+          "key": "terminal.osc52",
+          "type": "enum",
+          "defaultValue": "OnlyCopy",
+          "description": "Controls how OSC 52 escape sequences interact with the system clipboard. Disabled blocks all clipboard access, OnlyCopy allows writing, OnlyPaste allows reading, and CopyPaste allows both.",
+          "validValues": [
+            "Disabled",
+            "OnlyCopy",
+            "OnlyPaste",
+            "CopyPaste"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse",
+      "description": "Mouse input behavior settings.",
+      "parameters": [
+        {
+          "id": "mouse.hide_when_typing",
+          "key": "mouse.hide_when_typing",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically hide the mouse cursor while typing and show it again when the mouse is moved.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "mouse.bindings",
+          "key": "mouse.bindings",
+          "type": "list",
+          "defaultValue": "[]",
+          "description": "Custom mouse button bindings. Each entry maps a mouse button and optional modifier keys to an action.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "name": "General",
+      "description": "Top-level settings for configuration reloading, working directory, and config imports.",
+      "parameters": [
+        {
+          "id": "general.live_config_reload",
+          "key": "live_config_reload",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically apply configuration changes when the config file is saved, without restarting Alacritty.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "general.working_directory",
+          "key": "working_directory",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Directory that the shell starts in. When not set, the shell inherits the working directory of the parent process.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "general.import",
+          "key": "import",
+          "type": "list",
+          "defaultValue": "[]",
+          "description": "List of paths to additional TOML config files to import. Imported files are merged in order, with later values overriding earlier ones. Useful for separating color themes from the main config.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

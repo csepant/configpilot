@@ -1,0 +1,639 @@
+{
+  "tool": {
+    "id": "starship",
+    "name": "Starship",
+    "category": "CLI Tools",
+    "configPaths": [
+      "~/.config/starship.toml"
+    ],
+    "configFormat": "toml",
+    "iconName": "star"
+  },
+  "sections": [
+    {
+      "id": "prompt",
+      "name": "Prompt",
+      "description": "Top-level settings that control the overall prompt layout, timing, and structure.",
+      "parameters": [
+        {
+          "id": "prompt.format",
+          "key": "format",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Define the overall prompt format by specifying which modules to include and their order. Uses Starship format strings with $variable placeholders.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "prompt.right_format",
+          "key": "right_format",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Format string for the right-side prompt. Modules placed here appear right-aligned. Only supported by certain shells.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "prompt.scan_timeout",
+          "key": "scan_timeout",
+          "type": "int",
+          "defaultValue": "30",
+          "description": "Timeout in milliseconds for Starship to scan files in the current directory to determine which modules to show.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "prompt.command_timeout",
+          "key": "command_timeout",
+          "type": "int",
+          "defaultValue": "500",
+          "description": "Timeout in milliseconds for commands executed by Starship. If a command takes longer, Starship skips it and shows a fallback.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "prompt.add_newline",
+          "key": "add_newline",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Insert a blank line between shell prompts. Disable for a more compact terminal appearance.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "prompt.continuation_prompt",
+          "key": "continuation_prompt",
+          "type": "string",
+          "defaultValue": "[>](bright-black) ",
+          "description": "The continuation prompt shown when a command spans multiple lines. Displayed on the second line onward.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "character",
+      "name": "Character",
+      "description": "The character module shows a symbol next to the input area, changing color based on the last command's exit status.",
+      "parameters": [
+        {
+          "id": "character.success_symbol",
+          "key": "character.success_symbol",
+          "type": "string",
+          "defaultValue": "[>](bold green)",
+          "description": "Symbol displayed when the previous command exited successfully (exit code 0).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "character.error_symbol",
+          "key": "character.error_symbol",
+          "type": "string",
+          "defaultValue": "[>](bold red)",
+          "description": "Symbol displayed when the previous command failed (non-zero exit code).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "character.vimcmd_symbol",
+          "key": "character.vimcmd_symbol",
+          "type": "string",
+          "defaultValue": "[<](bold green)",
+          "description": "Symbol displayed when the shell is in Vim normal mode. Only shown when Vi key bindings are enabled.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "character.format",
+          "key": "character.format",
+          "type": "string",
+          "defaultValue": "$symbol ",
+          "description": "Format string for the character module. Controls how the character symbol is rendered.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "directory",
+      "name": "Directory",
+      "description": "The directory module shows the path to the current directory, with truncation and styling options.",
+      "parameters": [
+        {
+          "id": "directory.truncation_length",
+          "key": "directory.truncation_length",
+          "type": "int",
+          "defaultValue": "3",
+          "description": "Number of parent directories to show before truncating. Set to 0 to show only the current directory name.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.truncate_to_repo",
+          "key": "directory.truncate_to_repo",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Truncate the directory path to the root of the current git repository instead of using truncation_length.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.format",
+          "key": "directory.format",
+          "type": "string",
+          "defaultValue": "[$path]($style)[$read_only]($read_only_style) ",
+          "description": "Format string for the directory module. Controls how the path and read-only indicator are displayed.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.style",
+          "key": "directory.style",
+          "type": "string",
+          "defaultValue": "bold cyan",
+          "description": "Style applied to the directory path text. Accepts Starship style strings like 'bold blue' or '#ff5500'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.read_only",
+          "key": "directory.read_only",
+          "type": "string",
+          "defaultValue": "🔒",
+          "description": "Symbol displayed when the current directory is read-only.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.read_only_style",
+          "key": "directory.read_only_style",
+          "type": "string",
+          "defaultValue": "red",
+          "description": "Style applied to the read-only indicator symbol.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.home_symbol",
+          "key": "directory.home_symbol",
+          "type": "string",
+          "defaultValue": "~",
+          "description": "Symbol used to represent the home directory in the path display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "directory.use_os_path_sep",
+          "key": "directory.use_os_path_sep",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Use the OS-specific path separator instead of always using forward slash. On Windows this shows backslashes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "description": "Modules that display git repository information including branch, commit, and working tree status.",
+      "parameters": [
+        {
+          "id": "git.git_branch.format",
+          "key": "git_branch.format",
+          "type": "string",
+          "defaultValue": "on [$symbol$branch(:$remote_branch)]($style) ",
+          "description": "Format string for the git branch module. Controls how the branch name and symbol are displayed.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_branch.style",
+          "key": "git_branch.style",
+          "type": "string",
+          "defaultValue": "bold purple",
+          "description": "Style applied to the git branch display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_branch.symbol",
+          "key": "git_branch.symbol",
+          "type": "string",
+          "defaultValue": " ",
+          "description": "Symbol displayed before the branch name.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_status.format",
+          "key": "git_status.format",
+          "type": "string",
+          "defaultValue": "([\\[$all_status$ahead_behind\\]]($style) )",
+          "description": "Format string for the git status module. Controls the overall layout of status indicators.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_status.style",
+          "key": "git_status.style",
+          "type": "string",
+          "defaultValue": "bold red",
+          "description": "Style applied to the git status indicators.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_status.ahead",
+          "key": "git_status.ahead",
+          "type": "string",
+          "defaultValue": "⇡${count}",
+          "description": "Format string shown when the local branch is ahead of the remote. ${count} is replaced with the number of commits ahead.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_status.behind",
+          "key": "git_status.behind",
+          "type": "string",
+          "defaultValue": "⇣${count}",
+          "description": "Format string shown when the local branch is behind the remote. ${count} is replaced with the number of commits behind.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_status.diverged",
+          "key": "git_status.diverged",
+          "type": "string",
+          "defaultValue": "⇕⇡${ahead_count}⇣${behind_count}",
+          "description": "Format string shown when the local and remote branches have diverged.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_commit.format",
+          "key": "git_commit.format",
+          "type": "string",
+          "defaultValue": "[\\($hash$tag\\)]($style) ",
+          "description": "Format string for the git commit module. Controls how the commit hash and tag are displayed.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_commit.commit_hash_length",
+          "key": "git_commit.commit_hash_length",
+          "type": "int",
+          "defaultValue": "7",
+          "description": "Length of the displayed git commit hash. Standard short hash is 7 characters.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_commit.only_detached",
+          "key": "git_commit.only_detached",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Only show the commit hash when in detached HEAD state. Set to false to always show the hash.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "git.git_commit.tag_disabled",
+          "key": "git_commit.tag_disabled",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Disable showing tag information in the git commit module. Enable to see tag names next to commit hashes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "languages",
+      "name": "Languages",
+      "description": "Modules that detect and display the active version of programming language toolchains.",
+      "parameters": [
+        {
+          "id": "languages.python.format",
+          "key": "python.format",
+          "type": "string",
+          "defaultValue": "via [${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)",
+          "description": "Format string for the Python module. Shows the Python version and virtual environment name.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.python.symbol",
+          "key": "python.symbol",
+          "type": "string",
+          "defaultValue": "🐍 ",
+          "description": "Symbol displayed before the Python version number.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.nodejs.format",
+          "key": "nodejs.format",
+          "type": "string",
+          "defaultValue": "via [$symbol($version )]($style)",
+          "description": "Format string for the Node.js module. Shown when a package.json or .node-version file is detected.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.nodejs.symbol",
+          "key": "nodejs.symbol",
+          "type": "string",
+          "defaultValue": " ",
+          "description": "Symbol displayed before the Node.js version number.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.rust.format",
+          "key": "rust.format",
+          "type": "string",
+          "defaultValue": "via [$symbol($version )]($style)",
+          "description": "Format string for the Rust module. Shown when a Cargo.toml file is detected in the current directory.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.rust.symbol",
+          "key": "rust.symbol",
+          "type": "string",
+          "defaultValue": "🦀 ",
+          "description": "Symbol displayed before the Rust toolchain version.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.golang.format",
+          "key": "golang.format",
+          "type": "string",
+          "defaultValue": "via [$symbol($version )]($style)",
+          "description": "Format string for the Go module. Shown when a go.mod or .go file is detected.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.golang.symbol",
+          "key": "golang.symbol",
+          "type": "string",
+          "defaultValue": "🐹 ",
+          "description": "Symbol displayed before the Go version number.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.java.format",
+          "key": "java.format",
+          "type": "string",
+          "defaultValue": "via [$symbol($version )]($style)",
+          "description": "Format string for the Java module. Shown when a pom.xml, build.gradle, or .java file is detected.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "languages.java.symbol",
+          "key": "java.symbol",
+          "type": "string",
+          "defaultValue": "☕ ",
+          "description": "Symbol displayed before the Java version number.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "other_modules",
+      "name": "Other Modules",
+      "description": "Additional modules for command duration, time, battery, hostname, and username display.",
+      "parameters": [
+        {
+          "id": "other.cmd_duration.min_time",
+          "key": "cmd_duration.min_time",
+          "type": "int",
+          "defaultValue": "2000",
+          "description": "Minimum command duration in milliseconds before the duration is shown. Commands faster than this are not displayed.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.cmd_duration.format",
+          "key": "cmd_duration.format",
+          "type": "string",
+          "defaultValue": "took [$duration]($style) ",
+          "description": "Format string for the command duration display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.cmd_duration.show_milliseconds",
+          "key": "cmd_duration.show_milliseconds",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Show millisecond precision in the duration display instead of rounding to seconds.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.time.disabled",
+          "key": "time.disabled",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "The time module is disabled by default. Set to false to show the current time in the prompt.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.time.format",
+          "key": "time.format",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Format string for the time display using chrono strftime syntax, e.g. '%T' for 24-hour time or '%r' for 12-hour time.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.time.style",
+          "key": "time.style",
+          "type": "string",
+          "defaultValue": "bold yellow",
+          "description": "Style applied to the time display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.battery.full_symbol",
+          "key": "battery.full_symbol",
+          "type": "string",
+          "defaultValue": "🔋 ",
+          "description": "Symbol shown when the battery is fully charged.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.battery.charging_symbol",
+          "key": "battery.charging_symbol",
+          "type": "string",
+          "defaultValue": "⚡ ",
+          "description": "Symbol shown when the battery is currently charging.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.battery.discharging_symbol",
+          "key": "battery.discharging_symbol",
+          "type": "string",
+          "defaultValue": "💀 ",
+          "description": "Symbol shown when the battery is discharging.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.hostname.ssh_only",
+          "key": "hostname.ssh_only",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Only show the hostname when connected via SSH. Set to false to always display the hostname.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.hostname.format",
+          "key": "hostname.format",
+          "type": "string",
+          "defaultValue": "[$ssh_symbol$hostname]($style) in ",
+          "description": "Format string for the hostname module display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.username.show_always",
+          "key": "username.show_always",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Always show the username. By default, it is only shown when logged in via SSH or as a non-default user.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "other.username.format",
+          "key": "username.format",
+          "type": "string",
+          "defaultValue": "[$user]($style) in ",
+          "description": "Format string for the username module display.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

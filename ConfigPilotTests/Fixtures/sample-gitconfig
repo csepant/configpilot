@@ -1,0 +1,40 @@
+[user]
+	name = Test User
+	email = test@example.com
+
+[core]
+	editor = vim
+	autocrlf = input
+	whitespace = fix
+	excludesFile = ~/.gitignore_global
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[init]
+	defaultBranch = main
+
+[merge]
+	conflictStyle = diff3
+	ff = false
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[color]
+	ui = auto
+
+[credential]
+	helper = osxkeychain
+
+[commit]
+	gpgSign = false
+	verbose = true
+
+[rerere]
+	enabled = true

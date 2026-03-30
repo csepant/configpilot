@@ -1,0 +1,8 @@
+# MACOS
+.DS_Store
+# Swift
+build/
+.build/
+DerivedData/
+*.xcworkspace
+*.xcodeproj

@@ -1,0 +1,1010 @@
+{
+  "tool": {
+    "id": "ghostty",
+    "name": "Ghostty",
+    "category": "Dev Tools",
+    "configPaths": [
+      "~/.config/ghostty/config"
+    ],
+    "configFormat": "keyvalue",
+    "iconName": "text.cursor"
+  },
+  "sections": [
+    {
+      "id": "font",
+      "name": "Font",
+      "description": "Font selection, sizing, variation axes, codepoint mapping, and metric adjustments for terminal text rendering.",
+      "parameters": [
+        {
+          "id": "font.font-family",
+          "key": "font-family",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Primary font family for regular text. Uses the system default monospace font when not set. Can be specified multiple times for fallback ordering.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-family-bold",
+          "key": "font-family-bold",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family used for bold text. Inherits from font-family when not set.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-family-italic",
+          "key": "font-family-italic",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family used for italic text. Inherits from font-family when not set.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-family-bold-italic",
+          "key": "font-family-bold-italic",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family used for bold italic text. Inherits from font-family-bold when not set.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-size",
+          "key": "font-size",
+          "type": "float",
+          "defaultValue": "13.0",
+          "description": "Font size in points. On macOS this corresponds to the native point size; Ghostty handles Retina scaling automatically.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-variation",
+          "key": "font-variation",
+          "type": "string",
+          "defaultValue": null,
+          "description": "OpenType font variation settings for the regular font face, specified as axis=value pairs (e.g. wght=400). Can be repeated for multiple axes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-variation-bold",
+          "key": "font-variation-bold",
+          "type": "string",
+          "defaultValue": null,
+          "description": "OpenType font variation settings applied only to the bold face, specified as axis=value pairs.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-variation-italic",
+          "key": "font-variation-italic",
+          "type": "string",
+          "defaultValue": null,
+          "description": "OpenType font variation settings applied only to the italic face, specified as axis=value pairs.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-codepoint-map",
+          "key": "font-codepoint-map",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Maps specific Unicode codepoints or ranges to a particular font family, using the format U+XXXX=FontName or U+XXXX-U+YYYY=FontName. Can be repeated.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.font-thicken",
+          "key": "font-thicken",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Adds an extra pixel of thickness to font glyphs to make them bolder on high-DPI displays. Useful for fonts that appear too thin.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-cell-width",
+          "key": "adjust-cell-width",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Adjusts the terminal cell width. Accepts an absolute pixel value (e.g. 1) or a percentage (e.g. 10%). Positive values widen cells, negative values narrow them.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-cell-height",
+          "key": "adjust-cell-height",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Adjusts the terminal cell height (line spacing). Accepts an absolute pixel value or a percentage. Positive values increase line spacing.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-font-baseline",
+          "key": "adjust-font-baseline",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Shifts the font baseline up or down within the cell. Accepts a pixel value or percentage. Positive values move text down.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-underline-position",
+          "key": "adjust-underline-position",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Moves the underline decoration up or down relative to its default position. Accepts a pixel value or percentage.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-underline-thickness",
+          "key": "adjust-underline-thickness",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Adjusts the thickness of the underline decoration. Accepts an absolute pixel value or a percentage of the default thickness.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-strikethrough-position",
+          "key": "adjust-strikethrough-position",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Moves the strikethrough decoration up or down relative to its default position. Accepts a pixel value or percentage.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "font.adjust-strikethrough-thickness",
+          "key": "adjust-strikethrough-thickness",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Adjusts the thickness of the strikethrough decoration. Accepts an absolute pixel value or a percentage of the default thickness.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "window",
+      "name": "Window",
+      "description": "Window geometry, padding, decorations, and display behavior.",
+      "parameters": [
+        {
+          "id": "window.window-padding-x",
+          "key": "window-padding-x",
+          "type": "int",
+          "defaultValue": "2",
+          "description": "Horizontal padding in pixels on the left and right sides of the terminal content area.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-padding-y",
+          "key": "window-padding-y",
+          "type": "int",
+          "defaultValue": "2",
+          "description": "Vertical padding in pixels on the top and bottom of the terminal content area.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-padding-balance",
+          "key": "window-padding-balance",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Distribute extra padding evenly on all sides so the terminal content appears centered in the window.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-padding-color",
+          "key": "window-padding-color",
+          "type": "enum",
+          "defaultValue": "background",
+          "description": "The color used to fill the padding area around the terminal content.",
+          "validValues": [
+            "background",
+            "extend",
+            "extend-always"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-decoration",
+          "key": "window-decoration",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show or hide native window decorations (title bar and borders). Disabling removes all system chrome.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-title-font-family",
+          "key": "window-title-font-family",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Font family used for the window title on platforms that support custom title bar fonts. Defaults to the system UI font.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-theme",
+          "key": "window-theme",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls the window chrome color scheme. Auto follows the system appearance, or force light/dark/ghostty.",
+          "validValues": [
+            "auto",
+            "light",
+            "dark",
+            "ghostty"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-colorspace",
+          "key": "window-colorspace",
+          "type": "enum",
+          "defaultValue": "srgb",
+          "description": "Color space used for rendering the terminal surface.",
+          "validValues": [
+            "srgb",
+            "display-p3"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-vsync",
+          "key": "window-vsync",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Synchronize frame rendering to the display refresh rate to prevent tearing.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-inherit-working-directory",
+          "key": "window-inherit-working-directory",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "New windows and tabs inherit the working directory of the previously focused terminal surface.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-inherit-font-size",
+          "key": "window-inherit-font-size",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "New windows inherit the current font size of the previously focused terminal, including any runtime zoom adjustments.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.window-save-state",
+          "key": "window-save-state",
+          "type": "enum",
+          "defaultValue": "default",
+          "description": "Controls whether window positions and sizes are persisted and restored across application launches.",
+          "validValues": [
+            "default",
+            "never",
+            "always"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.initial-columns",
+          "key": "initial-columns",
+          "type": "int",
+          "defaultValue": "80",
+          "description": "Number of columns in the terminal grid when a new window is created.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.initial-rows",
+          "key": "initial-rows",
+          "type": "int",
+          "defaultValue": "24",
+          "description": "Number of rows in the terminal grid when a new window is created.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.maximize",
+          "key": "maximize",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Start the window in a maximized state. The window can still be unmaximized by the user.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "window.fullscreen",
+          "key": "fullscreen",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Start the window in fullscreen mode.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "appearance",
+      "name": "Appearance",
+      "description": "Visual styling options for colors, cursor, selection, opacity, and contrast.",
+      "parameters": [
+        {
+          "id": "appearance.theme",
+          "key": "theme",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Name of a built-in or custom color theme to apply. Custom themes are loaded from ~/.config/ghostty/themes/. Can also be set to light:name,dark:name for automatic switching.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.background",
+          "key": "background",
+          "type": "color",
+          "defaultValue": "#282c34",
+          "description": "Terminal background color as a hex RGB value.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.foreground",
+          "key": "foreground",
+          "type": "color",
+          "defaultValue": "#ffffff",
+          "description": "Default terminal text color as a hex RGB value.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.cursor-color",
+          "key": "cursor-color",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Color of the terminal cursor. When not set, the cursor uses the foreground color.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.cursor-text",
+          "key": "cursor-text",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Color of the text underneath the block cursor. When not set, uses the background color.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.cursor-style",
+          "key": "cursor-style",
+          "type": "enum",
+          "defaultValue": "block",
+          "description": "Shape of the terminal cursor.",
+          "validValues": [
+            "block",
+            "bar",
+            "underline"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.cursor-style-blink",
+          "key": "cursor-style-blink",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Whether the cursor blinks at a steady interval when idle.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.selection-background",
+          "key": "selection-background",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Background color of selected text. Defaults to an inverted foreground/background.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.selection-foreground",
+          "key": "selection-foreground",
+          "type": "color",
+          "defaultValue": null,
+          "description": "Text color of selected text. Defaults to an inverted foreground/background.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.selection-invert-fg-bg",
+          "key": "selection-invert-fg-bg",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When enabled, the selection colors are computed by swapping each cell's foreground and background rather than using fixed selection colors.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.minimum-contrast",
+          "key": "minimum-contrast",
+          "type": "float",
+          "defaultValue": "1.0",
+          "description": "Minimum contrast ratio between foreground and background colors, from 1.0 (no adjustment) to 21.0 (maximum). Colors are automatically adjusted to meet this threshold.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.bold-is-bright",
+          "key": "bold-is-bright",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Render bold text using the bright variant of the active ANSI color instead of the normal variant.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.background-opacity",
+          "key": "background-opacity",
+          "type": "float",
+          "defaultValue": "1.0",
+          "description": "Background opacity from 0.0 (fully transparent) to 1.0 (fully opaque). Requires compositor support for transparency.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.background-blur-radius",
+          "key": "background-blur-radius",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Radius of the Gaussian blur applied behind the translucent terminal background. Only effective when background-opacity is less than 1.0. Set to 0 to disable blur.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "appearance.unfocused-split-opacity",
+          "key": "unfocused-split-opacity",
+          "type": "float",
+          "defaultValue": "0.7",
+          "description": "Opacity multiplier applied to unfocused split panes, from 0.0 to 1.0. Lower values make inactive splits more transparent to visually distinguish the focused pane.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "shell",
+      "name": "Shell",
+      "description": "Shell program, integration, working directory, and scrollback settings.",
+      "parameters": [
+        {
+          "id": "shell.command",
+          "key": "command",
+          "type": "string",
+          "defaultValue": null,
+          "description": "The command or shell to run inside the terminal. When not set, Ghostty uses the user's default login shell from the system.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "shell.shell-integration",
+          "key": "shell-integration",
+          "type": "enum",
+          "defaultValue": "detect",
+          "description": "Controls Ghostty's automatic shell integration, which enables features like semantic prompts and working directory tracking.",
+          "validValues": [
+            "none",
+            "detect",
+            "bash",
+            "zsh",
+            "fish",
+            "elvish"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "shell.shell-integration-features",
+          "key": "shell-integration-features",
+          "type": "string",
+          "defaultValue": "cursor,sudo,title",
+          "description": "Comma-separated list of shell integration features to enable. Available features: cursor (cursor shape changes at prompt), sudo (sudo wrapper for Ghostty terminfo), title (sets window title to running command).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "shell.working-directory",
+          "key": "working-directory",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Starting directory for new terminal sessions. When not set, inherits the working directory of the parent process.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "shell.scrollback-limit",
+          "key": "scrollback-limit",
+          "type": "int",
+          "defaultValue": "10000",
+          "description": "Maximum number of lines stored in the scrollback buffer. Set to 0 for unlimited scrollback, though this uses more memory.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "clipboard",
+      "name": "Clipboard",
+      "description": "Clipboard access permissions, paste behavior, and copy-on-select settings.",
+      "parameters": [
+        {
+          "id": "clipboard.clipboard-read",
+          "key": "clipboard-read",
+          "type": "enum",
+          "defaultValue": "ask",
+          "description": "Controls whether applications in the terminal can read from the system clipboard via OSC 52.",
+          "validValues": [
+            "allow",
+            "deny",
+            "ask"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.clipboard-write",
+          "key": "clipboard-write",
+          "type": "enum",
+          "defaultValue": "allow",
+          "description": "Controls whether applications in the terminal can write to the system clipboard via OSC 52.",
+          "validValues": [
+            "allow",
+            "deny",
+            "ask"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.clipboard-trim-trailing-spaces",
+          "key": "clipboard-trim-trailing-spaces",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically strip trailing whitespace from each line when copying text to the clipboard.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.clipboard-paste-protection",
+          "key": "clipboard-paste-protection",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show a confirmation dialog before pasting content that contains potentially dangerous control characters or newlines.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.clipboard-paste-bracketed-safe",
+          "key": "clipboard-paste-bracketed-safe",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Sanitize pasted content by removing escape sequences that could break out of bracketed paste mode.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.copy-on-select",
+          "key": "copy-on-select",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically copy text to the clipboard as soon as it is selected with the mouse.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "clipboard.confirm-close-surface",
+          "key": "confirm-close-surface",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show a confirmation dialog when closing a terminal surface that has a running child process.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse",
+      "description": "Mouse behavior, scroll speed, and click handling.",
+      "parameters": [
+        {
+          "id": "mouse.mouse-hide-while-typing",
+          "key": "mouse-hide-while-typing",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically hide the mouse cursor while typing and reveal it again on mouse movement.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "mouse.mouse-scroll-multiplier",
+          "key": "mouse-scroll-multiplier",
+          "type": "int",
+          "defaultValue": "3",
+          "description": "Number of lines scrolled per scroll wheel notch. Higher values scroll faster.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "mouse.mouse-shift-capture",
+          "key": "mouse-shift-capture",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Controls whether holding Shift allows mouse events to be captured by the terminal application rather than performing native selection.",
+          "validValues": [
+            "true",
+            "false",
+            "always"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "mouse.focus-follows-mouse",
+          "key": "focus-follows-mouse",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Split panes receive keyboard focus when the mouse hovers over them without requiring a click.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "mouse.click-repeat-interval",
+          "key": "click-repeat-interval",
+          "type": "int",
+          "defaultValue": "300",
+          "description": "Maximum time in milliseconds between consecutive clicks to count as a multi-click (double-click, triple-click).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "keybindings",
+      "name": "Keybindings",
+      "description": "Keyboard shortcut customization and macOS Option key behavior.",
+      "parameters": [
+        {
+          "id": "keybindings.keybind",
+          "key": "keybind",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Define or override a keyboard shortcut. Format is modifier+key=action, for example super+c=copy_to_clipboard. Can be specified multiple times for multiple bindings.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "keybindings.macos-option-as-alt",
+          "key": "macos-option-as-alt",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Treat the macOS Option key as Alt for sending escape sequences to the terminal. Left or right applies only to that specific Option key.",
+          "validValues": [
+            "false",
+            "true",
+            "left",
+            "right"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "macos",
+      "name": "macOS",
+      "description": "macOS-specific settings for title bar style, fullscreen mode, and updates.",
+      "parameters": [
+        {
+          "id": "macos.macos-titlebar-style",
+          "key": "macos-titlebar-style",
+          "type": "enum",
+          "defaultValue": "transparent",
+          "description": "Style of the macOS window title bar. Native uses the standard system bar, transparent removes the background, hidden hides the title bar but keeps traffic light buttons, and tabs uses a tabbed style.",
+          "validValues": [
+            "native",
+            "transparent",
+            "hidden",
+            "tabs"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "macos.macos-titlebar-proxy-icon",
+          "key": "macos-titlebar-proxy-icon",
+          "type": "enum",
+          "defaultValue": "visible",
+          "description": "Controls visibility of the proxy icon (small folder icon) in the macOS title bar that represents the current working directory.",
+          "validValues": [
+            "visible",
+            "hidden"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "macos.macos-non-native-fullscreen",
+          "key": "macos-non-native-fullscreen",
+          "type": "enum",
+          "defaultValue": "false",
+          "description": "Use a non-native fullscreen mode that does not create a separate macOS Space, allowing faster transitions and overlay on the current desktop.",
+          "validValues": [
+            "false",
+            "true",
+            "visible-menu"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "macos.macos-window-shadow",
+          "key": "macos-window-shadow",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Render a drop shadow around the terminal window. Disabling can reduce visual clutter when using tiling window managers.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "macos.auto-update",
+          "key": "auto-update",
+          "type": "enum",
+          "defaultValue": "check",
+          "description": "Controls Ghostty's automatic update behavior on macOS. Check notifies about available updates, download also downloads them, and off disables update checks.",
+          "validValues": [
+            "off",
+            "check",
+            "download"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "description": "Advanced configuration for process management, UI overlays, and low-level terminal behavior.",
+      "parameters": [
+        {
+          "id": "advanced.gtk-single-instance",
+          "key": "gtk-single-instance",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "On Linux with GTK, reuse a single Ghostty process for all windows rather than spawning a new process each time. Not applicable on macOS.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.quit-after-last-window-closed",
+          "key": "quit-after-last-window-closed",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Quit the entire application when the last terminal window is closed. On macOS, the default behavior keeps the app running in the Dock.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.resize-overlay",
+          "key": "resize-overlay",
+          "type": "enum",
+          "defaultValue": "after-first",
+          "description": "Controls when a size overlay showing columns x rows appears during window resize.",
+          "validValues": [
+            "always",
+            "never",
+            "after-first"
+          ],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.link-url",
+          "key": "link-url",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically detect and highlight clickable URLs in terminal output. Cmd-click (macOS) or Ctrl-click (Linux) opens the URL.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.enquiry-response",
+          "key": "enquiry-response",
+          "type": "string",
+          "defaultValue": "",
+          "description": "The string sent in response to an ENQ (0x05) control character from the terminal application.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.abnormal-command-exit-runtime",
+          "key": "abnormal-command-exit-runtime",
+          "type": "int",
+          "defaultValue": "250",
+          "description": "Minimum runtime in milliseconds for a shell process. If the process exits before this threshold, Ghostty treats it as an abnormal exit and keeps the terminal surface open for inspection.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "advanced.config-file",
+          "key": "config-file",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Path to an additional configuration file to load. Can be specified multiple times. Values in later files override earlier ones.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,987 @@
+{
+  "tool": {
+    "id": "neovim",
+    "name": "Neovim",
+    "category": "Dev Tools",
+    "configPaths": [
+      "~/.config/nvim/init.lua",
+      "~/.config/nvim/init.vim"
+    ],
+    "configFormat": "lua",
+    "iconName": "doc.text"
+  },
+  "sections": [
+    {
+      "name": "General",
+      "parameters": [
+        {
+          "id": "opt.number",
+          "key": "number",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Show absolute line numbers in the gutter. Helps with navigating to specific lines using G or : commands.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.relativenumber",
+          "key": "relativenumber",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Show line numbers relative to the cursor position. Combined with number, displays the absolute number on the current line and relative numbers elsewhere.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.signcolumn",
+          "key": "signcolumn",
+          "type": "enum",
+          "defaultValue": "auto",
+          "description": "Controls when the sign column is displayed. Set to yes to prevent the text from shifting when diagnostics or git signs appear.",
+          "validValues": [
+            "auto",
+            "no",
+            "yes",
+            "yes:1",
+            "yes:2",
+            "number"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.mouse",
+          "key": "mouse",
+          "type": "string",
+          "defaultValue": "nvi",
+          "description": "Enable mouse support in the specified modes. Use a for all modes, or combine n (normal), v (visual), i (insert), c (command-line).",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.clipboard",
+          "key": "clipboard",
+          "type": "enum",
+          "defaultValue": "",
+          "description": "Synchronize the unnamed register with the system clipboard. Set to unnamedplus to use the system clipboard for all yank, delete, and put operations.",
+          "validValues": [
+            "",
+            "unnamed",
+            "unnamedplus",
+            "unnamed,unnamedplus"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.timeoutlen",
+          "key": "timeoutlen",
+          "type": "int",
+          "defaultValue": "1000",
+          "description": "Time in milliseconds to wait for a mapped key sequence to complete. Lower values make which-key and multi-key mappings feel snappier.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.updatetime",
+          "key": "updatetime",
+          "type": "int",
+          "defaultValue": "4000",
+          "description": "Time in milliseconds of inactivity before the swap file is written and CursorHold events fire. Lower values improve responsiveness of plugins like gitgutter and LSP diagnostics.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.undofile",
+          "key": "undofile",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Persist undo history to a file so changes survive closing and reopening a buffer. Requires undodir to be set for a clean undo directory.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.undodir",
+          "key": "undodir",
+          "type": "path",
+          "defaultValue": ".",
+          "description": "Directory where undo files are stored when undofile is enabled. A common choice is ~/.local/state/nvim/undo to keep project directories clean.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.swapfile",
+          "key": "swapfile",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Create a swap file for crash recovery. Disabling this avoids swap file warnings when opening a file already being edited.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.backup",
+          "key": "backup",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Keep a backup file after overwriting. Most users disable this since version control provides a better safety net.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.writebackup",
+          "key": "writebackup",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Make a temporary backup before overwriting a file. The backup is removed after the file is successfully written unless backup is also enabled.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.hidden",
+          "key": "hidden",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Allow switching buffers without saving. Unsaved buffers become hidden instead of being abandoned, preserving their undo history.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.autoread",
+          "key": "autoread",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically re-read a file when it has been changed outside of Neovim and there are no unsaved changes in the buffer.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.lazyredraw",
+          "key": "lazyredraw",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Do not redraw the screen while executing macros, registers, or other commands that have not been typed. Improves performance during macro replay.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.termguicolors",
+          "key": "termguicolors",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable 24-bit RGB color in the TUI. Required for most modern colorschemes to display correctly in terminal emulators that support true color.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.showmode",
+          "key": "showmode",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show the current mode (INSERT, VISUAL, etc.) on the last line. Often disabled when using a statusline plugin like lualine that already displays the mode.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.showcmd",
+          "key": "showcmd",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show partial commands in the last line of the screen. Displays the count or operator as you type multi-key commands.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.cmdheight",
+          "key": "cmdheight",
+          "type": "int",
+          "defaultValue": "1",
+          "description": "Number of screen lines to use for the command-line area. Set to 0 to hide it entirely (messages appear as notifications), or 2 to reduce hit-enter prompts.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.laststatus",
+          "key": "laststatus",
+          "type": "enum",
+          "defaultValue": "2",
+          "description": "Controls when the status line is displayed. 0 never, 1 only with multiple windows, 2 always, 3 single global statusline shared across all windows.",
+          "validValues": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "general"
+    },
+    {
+      "name": "Indentation",
+      "parameters": [
+        {
+          "id": "opt.tabstop",
+          "key": "tabstop",
+          "type": "int",
+          "defaultValue": "8",
+          "description": "Number of spaces that a tab character counts for visually. Most modern configs set this to 2 or 4 to match their project style.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.shiftwidth",
+          "key": "shiftwidth",
+          "type": "int",
+          "defaultValue": "8",
+          "description": "Number of spaces used for each step of auto-indent and the >> / << commands. Set to 0 to follow the tabstop value.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.softtabstop",
+          "key": "softtabstop",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Number of spaces inserted when pressing Tab in insert mode. Set to -1 to follow the shiftwidth value. Allows mixing tabs and spaces gracefully.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.expandtab",
+          "key": "expandtab",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Convert tab key presses to spaces. Enable this to ensure consistent indentation across editors and avoid tab/space mixing issues.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.smartindent",
+          "key": "smartindent",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically insert one extra level of indentation after lines that start a new block (such as { or keywords like if, for). Works best for C-like languages.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.autoindent",
+          "key": "autoindent",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Copy the indentation from the current line when starting a new line. Serves as the baseline indentation behavior before smartindent or filetype indent.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.shiftround",
+          "key": "shiftround",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Round indent to a multiple of shiftwidth when using >> and << commands. Keeps indentation aligned to consistent column boundaries.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.smarttab",
+          "key": "smarttab",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "When enabled, pressing Tab at the beginning of a line inserts blanks according to shiftwidth; elsewhere it uses tabstop or softtabstop.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "indentation"
+    },
+    {
+      "name": "Search",
+      "parameters": [
+        {
+          "id": "opt.hlsearch",
+          "key": "hlsearch",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Highlight all matches of the last search pattern. Use :nohlsearch or a mapped key to clear highlights after searching.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.incsearch",
+          "key": "incsearch",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show search matches incrementally as you type the pattern. The view scrolls to the first match in real time.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.ignorecase",
+          "key": "ignorecase",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Ignore case in search patterns. Best used together with smartcase so that searches with uppercase characters remain case-sensitive.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.smartcase",
+          "key": "smartcase",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Override ignorecase when the search pattern contains uppercase characters. Has no effect unless ignorecase is also enabled.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.wrapscan",
+          "key": "wrapscan",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Searches wrap around the end of the file and continue from the beginning. Disable to stop searching at the bottom or top of the file.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.gdefault",
+          "key": "gdefault",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Apply substitutions to all matches on a line by default, as if the g flag were always given. Adding g then toggles it off for a single substitution.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.magic",
+          "key": "magic",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Enable magic characters in search patterns so that special regex characters like . and * work without escaping. Disabling requires escaping most metacharacters.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "search"
+    },
+    {
+      "name": "Display",
+      "parameters": [
+        {
+          "id": "opt.wrap",
+          "key": "wrap",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Wrap long lines so the entire content is visible without horizontal scrolling. Disable for a more code-editor-like experience with horizontal scroll.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.linebreak",
+          "key": "linebreak",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When wrap is on, break lines at word boundaries instead of at the exact screen edge. Prevents words from being split across display lines.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.breakindent",
+          "key": "breakindent",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Preserve the visual indentation of wrapped lines so that continuation lines align with the start of the text rather than column zero.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.scrolloff",
+          "key": "scrolloff",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Minimum number of screen lines to keep above and below the cursor. Setting this to 8 or 10 keeps context visible while scrolling.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.sidescrolloff",
+          "key": "sidescrolloff",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Minimum number of columns to keep to the left and right of the cursor when wrap is off. Provides horizontal context while scrolling sideways.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.cursorline",
+          "key": "cursorline",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Highlight the entire screen line of the cursor. Makes it easy to locate the cursor position, especially in large files.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.cursorcolumn",
+          "key": "cursorcolumn",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Highlight the screen column of the cursor. Useful for aligning text vertically but can slow rendering on large files.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.colorcolumn",
+          "key": "colorcolumn",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Comma-separated list of columns to highlight with a vertical stripe. Commonly set to 80 or 120 to mark a line-length guideline.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.list",
+          "key": "list",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Display whitespace characters using the symbols defined in listchars. Useful for spotting trailing spaces, tabs, and non-breaking spaces.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.listchars",
+          "key": "listchars",
+          "type": "string",
+          "defaultValue": "tab:> ,trail:-,nbsp:+",
+          "description": "Define how invisible characters are rendered when list is enabled. Example: tab:>>,trail:.,nbsp:~ shows tabs as arrows, trailing spaces as dots.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.fillchars",
+          "key": "fillchars",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Characters used to fill various UI elements such as window separators, fold text, and end-of-buffer lines. Example: eob: hides the ~ markers.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.conceallevel",
+          "key": "conceallevel",
+          "type": "enum",
+          "defaultValue": "0",
+          "description": "Controls how text marked with the conceal syntax attribute is shown. 0 shows all text, 1 replaces with a single character, 2 hides unless a replacement is defined, 3 hides completely.",
+          "validValues": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.concealcursor",
+          "key": "concealcursor",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Modes in which concealed text on the cursor line stays concealed. A combination of n (normal), v (visual), i (insert), c (command). Empty means concealed text is revealed on the cursor line.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.foldmethod",
+          "key": "foldmethod",
+          "type": "enum",
+          "defaultValue": "manual",
+          "description": "Method used to create folds. Use expr with Treesitter for syntax-aware folding, indent for simple indentation-based folds, or marker for explicit fold markers.",
+          "validValues": [
+            "manual",
+            "indent",
+            "expr",
+            "marker",
+            "syntax",
+            "diff"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.foldlevel",
+          "key": "foldlevel",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Folds with a level higher than this value are closed. Setting to 99 effectively opens all folds when a file is loaded.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.foldlevelstart",
+          "key": "foldlevelstart",
+          "type": "int",
+          "defaultValue": "-1",
+          "description": "Initial fold level when opening a new buffer. Set to 99 to start with all folds open, or 0 to start with all folds closed. -1 uses the foldlevel value.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.foldnestmax",
+          "key": "foldnestmax",
+          "type": "int",
+          "defaultValue": "20",
+          "description": "Maximum nesting level for indent and syntax fold methods. Prevents deeply nested code from creating an excessive number of fold levels.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "display"
+    },
+    {
+      "name": "Window",
+      "parameters": [
+        {
+          "id": "opt.splitbelow",
+          "key": "splitbelow",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Place new horizontal splits below the current window instead of above. Matches the mental model of content flowing downward.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.splitright",
+          "key": "splitright",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Place new vertical splits to the right of the current window instead of to the left. Matches a left-to-right reading flow.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.equalalways",
+          "key": "equalalways",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically resize all windows to equal dimensions after splitting or closing a window. Disable to preserve manually resized window layouts.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.winminwidth",
+          "key": "winminwidth",
+          "type": "int",
+          "defaultValue": "1",
+          "description": "Minimum number of columns for any window. Prevents windows from collapsing to zero width when many vertical splits are open.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.winminheight",
+          "key": "winminheight",
+          "type": "int",
+          "defaultValue": "1",
+          "description": "Minimum number of lines for any window. Prevents windows from collapsing entirely when many horizontal splits are open.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "window"
+    },
+    {
+      "name": "Completion",
+      "parameters": [
+        {
+          "id": "opt.completeopt",
+          "key": "completeopt",
+          "type": "string",
+          "defaultValue": "menu,preview",
+          "description": "Comma-separated list of options for insert-mode completion. Common modern setting is menuone,noselect for LSP completion plugins like nvim-cmp.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.pumheight",
+          "key": "pumheight",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Maximum number of items shown in the popup completion menu. 0 means use as much space as available. Set to 10-15 for a compact menu.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.pumblend",
+          "key": "pumblend",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Pseudo-transparency of the popup menu as a percentage (0-100). Higher values blend the menu with the text behind it. Requires a compositor-capable terminal.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.wildmenu",
+          "key": "wildmenu",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Show a horizontal completion menu above the command line when pressing Tab for command-line completion.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.wildmode",
+          "key": "wildmode",
+          "type": "string",
+          "defaultValue": "full",
+          "description": "Completion mode for the wildmenu. Common setting is longest:full,full which completes to the longest common string first, then cycles through matches.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.wildignore",
+          "key": "wildignore",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Comma-separated list of file patterns to ignore during file-name completion. Example: *.o,*.pyc,__pycache__,node_modules to skip build artifacts.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.shortmess",
+          "key": "shortmess",
+          "type": "string",
+          "defaultValue": "filnxtToOF",
+          "description": "A string of flags that controls which messages are shortened or suppressed. Append c to avoid showing completion messages; append I to skip the intro screen.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "completion"
+    },
+    {
+      "name": "File",
+      "parameters": [
+        {
+          "id": "opt.encoding",
+          "key": "encoding",
+          "type": "string",
+          "defaultValue": "utf-8",
+          "description": "Internal character encoding used by Neovim for buffers, registers, and strings in expressions. Should almost always remain utf-8.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.fileencoding",
+          "key": "fileencoding",
+          "type": "string",
+          "defaultValue": "",
+          "description": "Character encoding for the current buffer when writing the file. Empty means use the value of encoding. Set to utf-8 explicitly for new files.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.fileformat",
+          "key": "fileformat",
+          "type": "enum",
+          "defaultValue": "unix",
+          "description": "Line ending format for the current buffer. Use unix for LF line endings or dos for CRLF. This affects how the file is written to disk.",
+          "validValues": [
+            "unix",
+            "dos",
+            "mac"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.fileformats",
+          "key": "fileformats",
+          "type": "string",
+          "defaultValue": "unix,dos",
+          "description": "Comma-separated list of line ending formats to try when reading a file. The first match is used. Order matters for automatic detection.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.fixendofline",
+          "key": "fixendofline",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Ensure the file ends with a newline character when writing. Disable if you need to preserve files that intentionally lack a trailing newline.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.endofline",
+          "key": "endofline",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Indicates whether the last line of the file has an end-of-line character. Automatically set when reading a file; used by fixendofline when writing.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "file"
+    },
+    {
+      "name": "Editing",
+      "parameters": [
+        {
+          "id": "opt.backspace",
+          "key": "backspace",
+          "type": "string",
+          "defaultValue": "indent,eol,start",
+          "description": "Controls what Backspace can delete in insert mode. The default allows deleting over autoindent, line breaks, and past the start of insert. Rarely needs changing.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.virtualedit",
+          "key": "virtualedit",
+          "type": "enum",
+          "defaultValue": "",
+          "description": "Allow the cursor to move where there is no actual character. Set to block for visual block mode only, or all to move freely anywhere on screen.",
+          "validValues": [
+            "",
+            "block",
+            "insert",
+            "all",
+            "onemore",
+            "none"
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.whichwrap",
+          "key": "whichwrap",
+          "type": "string",
+          "defaultValue": "b,s",
+          "description": "Allow specified keys to move the cursor to the previous or next line when at the start or end of a line. Common addition: b,s,<,>,[,] for arrow keys.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.formatoptions",
+          "key": "formatoptions",
+          "type": "string",
+          "defaultValue": "tcqj",
+          "description": "Flags controlling automatic formatting behavior. Remove o to stop inserting comment leaders when pressing o/O. Remove c and r to stop auto-wrapping comments.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.textwidth",
+          "key": "textwidth",
+          "type": "int",
+          "defaultValue": "0",
+          "description": "Maximum width of text being inserted. A non-zero value enables automatic line breaking at the specified column. 0 disables automatic wrapping.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.spell",
+          "key": "spell",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable spell checking. Misspelled words are highlighted and can be corrected with z= or navigated with ]s and [s.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.spelllang",
+          "key": "spelllang",
+          "type": "string",
+          "defaultValue": "en",
+          "description": "Comma-separated list of languages for spell checking. Neovim downloads spell files automatically. Example: en_us,en_gb for both American and British English.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.spellfile",
+          "key": "spellfile",
+          "type": "path",
+          "defaultValue": "",
+          "description": "Path to a file where words added with zg are stored. Allows maintaining a personal dictionary of accepted words across sessions.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.inccommand",
+          "key": "inccommand",
+          "type": "enum",
+          "defaultValue": "nosplit",
+          "description": "Show the effect of a substitution command incrementally as you type. Set to split to also show off-screen changes in a preview window.",
+          "validValues": [
+            "nosplit",
+            "split",
+            ""
+          ],
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "opt.confirm",
+          "key": "confirm",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Present a confirmation dialog instead of failing when a command would abandon unsaved changes. Applies to commands like :q and :e.",
+          "validValues": null,
+          "since": "0.1.0",
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ],
+      "id": "editing"
+    }
+  ]
+}

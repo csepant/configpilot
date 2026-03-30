@@ -1,0 +1,636 @@
+{
+  "tool": {
+    "id": "zsh",
+    "name": "Zsh",
+    "category": "CLI Tools",
+    "configPaths": [
+      "~/.zshrc",
+      "~/.zshenv"
+    ],
+    "configFormat": "zshrc",
+    "iconName": "terminal"
+  },
+  "sections": [
+    {
+      "id": "history",
+      "name": "History",
+      "description": "Settings that control command history storage, deduplication, and sharing across sessions.",
+      "parameters": [
+        {
+          "id": "var.HISTSIZE",
+          "key": "HISTSIZE",
+          "type": "int",
+          "defaultValue": "10000",
+          "description": "Maximum number of history entries kept in memory for the current session. Increase for longer history recall.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "var.SAVEHIST",
+          "key": "SAVEHIST",
+          "type": "int",
+          "defaultValue": "10000",
+          "description": "Maximum number of history entries saved to the history file. Should generally match or exceed HISTSIZE.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "var.HISTFILE",
+          "key": "HISTFILE",
+          "type": "path",
+          "defaultValue": "~/.zsh_history",
+          "description": "Path to the file where command history is stored persistently between sessions.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_EXPIRE_DUPS_FIRST",
+          "key": "HIST_EXPIRE_DUPS_FIRST",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When trimming history to HISTSIZE, remove duplicate entries before unique ones. Keeps more distinct commands in history.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_IGNORE_DUPS",
+          "key": "HIST_IGNORE_DUPS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Do not record a command if it is identical to the previous history entry. Reduces clutter from repeated commands.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_IGNORE_ALL_DUPS",
+          "key": "HIST_IGNORE_ALL_DUPS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Remove older duplicate entries from history when a new duplicate is added. More aggressive than HIST_IGNORE_DUPS.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_FIND_NO_DUPS",
+          "key": "HIST_FIND_NO_DUPS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When searching history with Ctrl+R, skip duplicate entries even if they exist in the history file.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_SAVE_NO_DUPS",
+          "key": "HIST_SAVE_NO_DUPS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When writing the history file, remove older duplicate commands. Only the most recent occurrence is kept.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.SHARE_HISTORY",
+          "key": "SHARE_HISTORY",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Share command history between all running Zsh sessions in real time. Commands typed in one terminal appear in the history of others.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.APPEND_HISTORY",
+          "key": "APPEND_HISTORY",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Append new history entries to the history file rather than overwriting it. Essential when running multiple Zsh sessions.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.INC_APPEND_HISTORY",
+          "key": "INC_APPEND_HISTORY",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Write each command to the history file immediately after execution, not just when the shell exits. Protects against history loss from crashes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.EXTENDED_HISTORY",
+          "key": "EXTENDED_HISTORY",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Save timestamps and command duration alongside each history entry. Enables the 'history -D' and 'history -i' display formats.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_VERIFY",
+          "key": "HIST_VERIFY",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "When using history expansion (e.g. !!), show the expanded command for confirmation before executing it.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.HIST_REDUCE_BLANKS",
+          "key": "HIST_REDUCE_BLANKS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Remove superfluous whitespace from history entries before saving. Helps with deduplication of commands with varying whitespace.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "completion",
+      "name": "Completion",
+      "description": "Settings that control tab completion behavior and menu display.",
+      "parameters": [
+        {
+          "id": "setopt.AUTO_MENU",
+          "key": "AUTO_MENU",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically show a completion menu on the second consecutive tab press when completions are ambiguous.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.COMPLETE_IN_WORD",
+          "key": "COMPLETE_IN_WORD",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Allow completion from the middle of a word. The cursor does not need to be at the end of the word to trigger completion.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.ALWAYS_TO_END",
+          "key": "ALWAYS_TO_END",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Move the cursor to the end of the word after accepting a completion, even when completing from the middle.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.AUTO_LIST",
+          "key": "AUTO_LIST",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Automatically list completion choices when the completion is ambiguous.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.LIST_PACKED",
+          "key": "LIST_PACKED",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Make the completion list use variable-width columns to fit more entries on screen.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.LIST_ROWS_FIRST",
+          "key": "LIST_ROWS_FIRST",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Lay out completion matches in rows rather than columns when displaying the list.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.MENU_COMPLETE",
+          "key": "MENU_COMPLETE",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "On ambiguous completion, insert the first match immediately and cycle through matches on subsequent tabs instead of showing a list.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.GLOB_COMPLETE",
+          "key": "GLOB_COMPLETE",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Generate completions using glob patterns. The glob pattern is expanded and the results are offered as completions.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "directory",
+      "name": "Directory Navigation",
+      "description": "Settings that simplify directory navigation and manage the directory stack.",
+      "parameters": [
+        {
+          "id": "setopt.AUTO_CD",
+          "key": "AUTO_CD",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Type a directory name without 'cd' to change into it. Saves keystrokes for frequent directory changes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.AUTO_PUSHD",
+          "key": "AUTO_PUSHD",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Automatically push directories onto the directory stack when using cd. Enables easy navigation back with 'popd' or 'cd -'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.PUSHD_IGNORE_DUPS",
+          "key": "PUSHD_IGNORE_DUPS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Do not push duplicate directories onto the directory stack. Keeps the stack clean.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.PUSHD_MINUS",
+          "key": "PUSHD_MINUS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Swap the meaning of '+' and '-' in directory stack references. Makes 'cd -1' refer to the previous directory.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.PUSHD_SILENT",
+          "key": "PUSHD_SILENT",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Do not print the directory stack after pushd or popd. Reduces terminal noise.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.PUSHD_TO_HOME",
+          "key": "PUSHD_TO_HOME",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Make pushd with no arguments go to the home directory, like cd does by default.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.CDABLE_VARS",
+          "key": "CDABLE_VARS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Allow cd to use variable names as directory targets. If 'foo=/some/path', then 'cd foo' changes to /some/path.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "globbing",
+      "name": "Globbing & Pattern Matching",
+      "description": "Settings that control filename generation (globbing) and pattern matching behavior.",
+      "parameters": [
+        {
+          "id": "setopt.EXTENDED_GLOB",
+          "key": "EXTENDED_GLOB",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable extended glob operators like ^, ~, and # for more powerful pattern matching. Highly recommended for power users.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.GLOB_DOTS",
+          "key": "GLOB_DOTS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Include dotfiles (hidden files) in glob results without requiring an explicit leading dot in the pattern.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.NOMATCH",
+          "key": "NOMATCH",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Report an error when a glob pattern does not match any files. Disable (unsetopt) to pass unmatched globs through as literal strings.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.NULL_GLOB",
+          "key": "NULL_GLOB",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Remove unmatched glob patterns from the argument list silently instead of reporting an error. Useful in scripts.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.NUMERIC_GLOB_SORT",
+          "key": "NUMERIC_GLOB_SORT",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Sort filenames numerically when they contain numbers, so 'file2' comes before 'file10'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.RC_EXPAND_PARAM",
+          "key": "RC_EXPAND_PARAM",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable array expansion with the ${^array} syntax. When set, 'X${^array}Y' expands to 'Xa1Y Xa2Y ...' for each array element.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "input_output",
+      "name": "Input / Output",
+      "description": "Settings that control line editing, error correction, and I/O behavior.",
+      "parameters": [
+        {
+          "id": "setopt.CORRECT",
+          "key": "CORRECT",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Offer to correct the spelling of commands. Zsh will suggest alternatives when a mistyped command is entered.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.CORRECT_ALL",
+          "key": "CORRECT_ALL",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Offer to correct all arguments in a command line, not just the command name. Can be overly aggressive.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.INTERACTIVE_COMMENTS",
+          "key": "INTERACTIVE_COMMENTS",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Allow comments (lines starting with #) in interactive shell sessions. Useful for annotating complex command lines.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.NO_CLOBBER",
+          "key": "NO_CLOBBER",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Prevent output redirection (>) from overwriting existing files. Use '>|' or '>!' to force overwrite when needed.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.NO_FLOW_CONTROL",
+          "key": "NO_FLOW_CONTROL",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Disable Ctrl+S (stop) and Ctrl+Q (resume) flow control. Frees up these key bindings for other uses.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.PROMPT_SUBST",
+          "key": "PROMPT_SUBST",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable parameter expansion, command substitution, and arithmetic expansion in prompt strings.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.EMACS",
+          "key": "EMACS",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Use Emacs-style key bindings for line editing. This is the default editing mode in Zsh.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.VI",
+          "key": "VI",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Use Vi-style key bindings for line editing. Provides normal/insert mode switching on the command line.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "variables",
+      "name": "Environment Variables",
+      "description": "Common environment variables set in Zsh configuration that affect shell and application behavior.",
+      "parameters": [
+        {
+          "id": "export.EDITOR",
+          "key": "EDITOR",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Default text editor used by shell commands and programs that need to open an editor (e.g. git commit, crontab -e).",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.VISUAL",
+          "key": "VISUAL",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Preferred visual editor. Takes precedence over EDITOR for programs that support it. Typically set to the same value as EDITOR.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.PAGER",
+          "key": "PAGER",
+          "type": "string",
+          "defaultValue": "less",
+          "description": "Default pager program used for viewing long output (e.g. man pages). Common values: 'less', 'most', 'bat'.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.LANG",
+          "key": "LANG",
+          "type": "string",
+          "defaultValue": "en_US.UTF-8",
+          "description": "Default locale for the shell environment. Affects character encoding, date formats, and sorting. UTF-8 is strongly recommended.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.PATH",
+          "key": "PATH",
+          "type": "string",
+          "defaultValue": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+          "description": "Colon-separated list of directories searched for executable commands. Typically extended with additional paths in .zshrc.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.TERM",
+          "key": "TERM",
+          "type": "string",
+          "defaultValue": "xterm-256color",
+          "description": "Terminal type identifier. Tells applications what capabilities the terminal supports. Usually set by the terminal emulator.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "prompt",
+      "name": "Prompt",
+      "description": "Settings that control the appearance and behavior of the shell prompt.",
+      "parameters": [
+        {
+          "id": "export.PS1",
+          "key": "PS1",
+          "type": "string",
+          "defaultValue": "%m%# ",
+          "description": "Primary prompt string displayed before each command. Supports Zsh prompt escape sequences like %n (username), %m (hostname), %~ (directory), and %F{color}.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "export.RPROMPT",
+          "key": "RPROMPT",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Right-side prompt string displayed on the right edge of the terminal. Commonly used to show git status, timestamps, or return codes.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "setopt.TRANSIENT_RPROMPT",
+          "key": "TRANSIENT_RPROMPT",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Remove the right prompt from previous command lines when a new prompt is displayed. Keeps the terminal cleaner when scrolling back.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}
