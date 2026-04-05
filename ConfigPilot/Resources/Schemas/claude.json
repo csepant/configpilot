@@ -1,0 +1,435 @@
+{
+  "tool": {
+    "id": "claude",
+    "name": "Claude Code",
+    "category": "Dev Tools",
+    "configPaths": ["~/.claude/settings.json", ".claude/settings.json"],
+    "configFormat": "json",
+    "iconName": "brain"
+  },
+  "sections": [
+    {
+      "id": "general",
+      "name": "General",
+      "description": "Core behavior and appearance settings",
+      "parameters": [
+        {
+          "id": "defaultMode",
+          "key": "defaultMode",
+          "type": "enum",
+          "defaultValue": "default",
+          "description": "Permission mode for new sessions. Controls how much autonomy Claude has when executing tools and making changes.",
+          "validValues": ["default", "acceptEdits", "plan", "auto", "dontAsk", "bypassPermissions"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "theme",
+          "key": "theme",
+          "type": "enum",
+          "defaultValue": "dark",
+          "description": "Terminal color scheme. Controls the visual appearance of Claude Code in the terminal.",
+          "validValues": ["dark", "light", "auto"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "model",
+          "key": "model",
+          "type": "string",
+          "defaultValue": "default",
+          "description": "Default LLM model to use. Set to a specific model ID like 'claude-sonnet-4-20250514' or 'claude-opus-4-20250514', or 'default' for the latest recommended model.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "outputStyle",
+          "key": "outputStyle",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Output formatting style. Can reference a built-in style or a custom style defined in ~/.claude/output-styles/.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "fastMode",
+          "key": "fastMode",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Use faster model variant for quicker responses. Trades some quality for speed. Toggle with /fast in session.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "extendedThinking",
+          "key": "extendedThinking",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable extended thinking mode by default. Claude will spend more time reasoning through complex problems before responding.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "autoMemoryEnabled",
+          "key": "autoMemoryEnabled",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Enable automatic memory. When enabled, Claude saves important context about your project and preferences to persistent memory files for future sessions.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "autoMemoryDirectory",
+          "key": "autoMemoryDirectory",
+          "type": "path",
+          "defaultValue": null,
+          "description": "Custom path for auto memory storage. Relative paths expand to home directory. Defaults to ~/.claude/projects/<project-id>/memory/.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "disableAllHooks",
+          "key": "disableAllHooks",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Disable all hooks when true. Useful for debugging or when hooks are causing issues.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "additionalDirectories",
+          "key": "additionalDirectories",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Additional directory paths Claude can read and edit beyond the current working directory. Useful for monorepos or shared code libraries.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "claudeMdExcludes",
+          "key": "claudeMdExcludes",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Glob patterns for CLAUDE.md files to skip. Useful for excluding instructions from specific subdirectories.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "permissions",
+      "name": "Permissions",
+      "description": "Control which tools and commands Claude can use",
+      "parameters": [
+        {
+          "id": "permissions.allow",
+          "key": "permissions.allow",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Pre-approved tool/command patterns. Examples: 'Bash(npm run *)' allows npm commands, 'Read(/src/**)' allows reading src, 'Edit(/src/**/*.ts)' allows editing TypeScript files.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "permissions.deny",
+          "key": "permissions.deny",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Blocked tool/command patterns. Examples: 'Bash(rm -rf)' blocks destructive removal, 'Edit(.env)' blocks editing secrets, 'Bash(git push)' blocks pushing.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "permissions.ask",
+          "key": "permissions.ask",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Tools/commands that always trigger a permission prompt, even in auto mode. Ensures human review for sensitive operations.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "permissions.disableBypassPermissionsMode",
+          "key": "permissions.disableBypassPermissionsMode",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Set to 'disable' to prevent users from entering bypass permissions mode. Useful for managed/enterprise deployments.",
+          "validValues": ["disable"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "permissions.disableAutoMode",
+          "key": "permissions.disableAutoMode",
+          "type": "enum",
+          "defaultValue": null,
+          "description": "Set to 'disable' to prevent users from entering auto mode. Forces manual approval of all tool usage.",
+          "validValues": ["disable"],
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "sandbox",
+      "name": "Sandbox",
+      "description": "Filesystem and network isolation for Bash commands",
+      "parameters": [
+        {
+          "id": "sandbox.enabled",
+          "key": "sandbox.enabled",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Enable filesystem and network isolation for Bash tool. Restricts where commands can read/write and which network domains they can access.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.filesystem.allowRead",
+          "key": "sandbox.filesystem.allowRead",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Paths that Bash commands are allowed to read from. Supports glob patterns.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.filesystem.denyRead",
+          "key": "sandbox.filesystem.denyRead",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Paths that Bash commands are blocked from reading. Takes precedence over allowRead.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.filesystem.allowWrite",
+          "key": "sandbox.filesystem.allowWrite",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Paths that Bash commands are allowed to write to. Supports glob patterns.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.filesystem.denyWrite",
+          "key": "sandbox.filesystem.denyWrite",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Paths that Bash commands are blocked from writing to. Takes precedence over allowWrite.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.filesystem.allowedSubprocessWriteAccess",
+          "key": "sandbox.filesystem.allowedSubprocessWriteAccess",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Paths that subprocesses spawned by Bash can write to. More permissive than the main write rules.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.network.allowedDomains",
+          "key": "sandbox.network.allowedDomains",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Network domains that Bash commands can access. Other domains are blocked when sandbox is enabled.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "sandbox.network.denyDomains",
+          "key": "sandbox.network.denyDomains",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Network domains that Bash commands are blocked from accessing. Takes precedence over allowedDomains.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "plugins",
+      "name": "Plugins",
+      "description": "Plugin and marketplace configuration",
+      "parameters": [
+        {
+          "id": "enabledPlugins",
+          "key": "enabledPlugins",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Map of plugin names to booleans. Example: {\"swift-lsp@claude-plugins-official\": true}. Enables or disables specific plugins.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "extraKnownMarketplaces",
+          "key": "extraKnownMarketplaces",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Additional plugin marketplace URLs beyond the official marketplace. Allows installing plugins from custom sources.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "strictKnownMarketplaces",
+          "key": "strictKnownMarketplaces",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Only allow plugins from official and configured marketplaces. Blocks plugins from unknown sources.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "attribution",
+      "name": "Attribution",
+      "description": "Code contribution tracking settings",
+      "parameters": [
+        {
+          "id": "attribution.enabled",
+          "key": "attribution.enabled",
+          "type": "bool",
+          "defaultValue": "false",
+          "description": "Track code contributions made by Claude. When enabled, records which code was written or modified by Claude.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "attribution.excludedFilePatterns",
+          "key": "attribution.excludedFilePatterns",
+          "type": "list",
+          "defaultValue": null,
+          "description": "File patterns to exclude from attribution tracking. Uses glob syntax.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "automode",
+      "name": "Auto Mode",
+      "description": "Configuration for autonomous operation mode",
+      "parameters": [
+        {
+          "id": "autoMode.environment",
+          "key": "autoMode.environment",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Prose description of trusted infrastructure. Helps Claude understand what environment it's running in during auto mode.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "autoMode.allow",
+          "key": "autoMode.allow",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Prose rules describing what actions are allowed in auto mode. Claude follows these guidelines when operating autonomously.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "autoMode.soft_deny",
+          "key": "autoMode.soft_deny",
+          "type": "list",
+          "defaultValue": null,
+          "description": "Prose rules for risky actions to block in auto mode. Claude will pause and ask for confirmation before taking these actions.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    },
+    {
+      "id": "environment",
+      "name": "Environment",
+      "description": "Environment variables and file suggestions",
+      "parameters": [
+        {
+          "id": "env",
+          "key": "env",
+          "type": "string",
+          "defaultValue": null,
+          "description": "Persistent environment variables as a JSON object. Example: {\"DEBUG\": \"true\", \"NODE_ENV\": \"development\"}. Available to all Bash commands.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        },
+        {
+          "id": "fileSuggestions.enabled",
+          "key": "fileSuggestions.enabled",
+          "type": "bool",
+          "defaultValue": "true",
+          "description": "Enable file suggestions when Claude reads code. Shows relevant files that might be worth examining.",
+          "validValues": null,
+          "since": null,
+          "deprecated": false,
+          "deprecatedMessage": null
+        }
+      ]
+    }
+  ]
+}

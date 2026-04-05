@@ -15,11 +15,13 @@ struct ContentView: View {
                         .environmentObject(appState)
                         .frame(minWidth: 340, maxWidth: .infinity, maxHeight: .infinity)
 
-                    ConfigInspectorView(tool: tool)
+                    ConfigInspectorView(tool: tool, schemaStore: appState.schemaStore)
+                        .environmentObject(appState)
                         .frame(minWidth: 280, maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .inspector(isPresented: $showRecommendations) {
-                    RecommendationsView(tool: tool)
+                    RecommendationsView(tool: tool, schemaStore: appState.schemaStore)
+                        .environmentObject(appState)
                         .inspectorColumnWidth(min: 280, ideal: 320, max: 400)
                 }
             } else {
@@ -54,5 +56,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environmentObject(AppState())
+        .environmentObject(AppState.preview())
 }

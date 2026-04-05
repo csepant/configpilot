@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import Combine
 
 @MainActor
@@ -6,10 +7,16 @@ class SchemaStore: ObservableObject {
     @Published var tools: [Tool] = []
     @Published var loadedSchemas: [String: [ParameterSection]] = [:]
 
-    private let loader = SchemaLoader()
+    private let modelContext: ModelContext
+
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
 
     func loadCatalog() {
-        tools = loader.loadToolCatalog()
+        let descriptor = FetchDescriptor<ToolModel>(sortBy: [SortDescriptor(\.name)])
+        guard let toolModels = try? modelContext.fetch(descriptor) else { return }
+        tools = toolModels.map { $0.toValueType() }
     }
 
     func schema(for toolId: String) -> [ParameterSection]? {
@@ -17,14 +24,15 @@ class SchemaStore: ObservableObject {
             return cached
         }
 
-        do {
-            let (_, sections) = try loader.loadSchema(for: toolId)
-            loadedSchemas[toolId] = sections
-            return sections
-        } catch {
-            print("Failed to load schema for \(toolId): \(error)")
-            return nil
-        }
+        let descriptor = FetchDescriptor<ToolModel>(
+            predicate: #Predicate<ToolModel> { tool in tool.toolID == toolId }
+        )
+
+        guard let toolModel = try? modelContext.fetch(descriptor).first else { return nil }
+
+        let sections = toolModel.sortedSections().map { $0.toValueType() }
+        loadedSchemas[toolId] = sections
+        return sections
     }
 
     func searchParameters(query: String) -> [(Tool, Parameter)] {
@@ -44,5 +52,9 @@ class SchemaStore: ObservableObject {
             }
         }
         return results
+    }
+
+    func invalidateCache() {
+        loadedSchemas.removeAll()
     }
 }

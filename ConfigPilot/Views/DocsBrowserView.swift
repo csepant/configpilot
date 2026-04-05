@@ -48,11 +48,16 @@ struct DocsBrowserView: View {
                 List {
                     ForEach(sections) { section in
                         Section {
-                            ForEach(section.parameters) { param in
-                                ParameterRow(
-                                    parameter: param,
-                                    configValue: viewModel.configValue(for: param.id)
-                                )
+                            if viewModel.isSectionExpanded(section.id) {
+                                ForEach(section.parameters) { param in
+                                    ParameterRow(
+                                        parameter: param,
+                                        configValue: viewModel.configValue(for: param.id),
+                                        onAddToConfig: { parameter in
+                                            appState.parameterToAdd = parameter
+                                        }
+                                    )
+                                }
                             }
                         } header: {
                             SectionHeader(

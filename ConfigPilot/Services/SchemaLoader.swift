@@ -48,7 +48,7 @@ class SchemaLoader {
     }
 
     func loadToolCatalog() -> [Tool] {
-        let toolIds = ["git", "neovim", "tmux", "zsh", "alacritty", "ghostty", "starship"]
+        let toolIds = ["git", "neovim", "tmux", "zsh", "alacritty", "ghostty", "starship", "claude"]
         return toolIds.compactMap { id in
             try? loadSchema(for: id).0
         }

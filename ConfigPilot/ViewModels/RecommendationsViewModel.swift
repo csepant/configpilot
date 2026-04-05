@@ -6,7 +6,7 @@ class RecommendationsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
 
-    private let schemaStore = SchemaStore()
+    private let schemaStore: SchemaStore
     private let scanner = ConfigScanner()
     private let parser = ConfigParser()
     private let validator = ConfigValidator()
@@ -14,8 +14,11 @@ class RecommendationsViewModel: ObservableObject {
     private var lastRequestTime: Date?
     private let cooldownInterval: TimeInterval = 30
 
+    init(schemaStore: SchemaStore) {
+        self.schemaStore = schemaStore
+    }
+
     func getRecommendations(for tool: Tool) async {
-        // Cooldown check
         if let lastTime = lastRequestTime,
            Date().timeIntervalSince(lastTime) < cooldownInterval {
             error = "Please wait before requesting again."
@@ -31,9 +34,6 @@ class RecommendationsViewModel: ObservableObject {
         error = nil
 
         do {
-            schemaStore.loadCatalog()
-
-            // Build config state
             let files = scanner.scan(tool: tool)
             var allValues: [ConfigValue] = []
             for file in files {

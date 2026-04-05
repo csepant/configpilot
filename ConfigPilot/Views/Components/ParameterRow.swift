@@ -3,6 +3,7 @@ import SwiftUI
 struct ParameterRow: View {
     let parameter: Parameter
     var configValue: ConfigValue?
+    var onAddToConfig: ((Parameter) -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -16,6 +17,15 @@ struct ParameterRow: View {
 
                 if let configValue = configValue {
                     ConfigValueBadge(value: configValue.rawValue, style: .set)
+                } else if let onAdd = onAddToConfig, !parameter.deprecated {
+                    Button {
+                        onAdd(parameter)
+                    } label: {
+                       Image(systemName: "plus.circle")
+                            .font(.subheadline)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.blue)
                 }
 
                 Spacer()

@@ -2,7 +2,13 @@ import SwiftUI
 
 struct RecommendationsView: View {
     let tool: Tool
-    @StateObject private var viewModel = RecommendationsViewModel()
+    @EnvironmentObject var appState: AppState
+    @StateObject private var viewModel: RecommendationsViewModel
+
+    init(tool: Tool, schemaStore: SchemaStore) {
+        self.tool = tool
+        _viewModel = StateObject(wrappedValue: RecommendationsViewModel(schemaStore: schemaStore))
+    }
 
     var body: some View {
         VStack(spacing: 0) {

@@ -28,9 +28,8 @@ class DocsViewModel: ObservableObject {
         let lowered = query.lowercased()
 
         return sections.compactMap { section in
-            guard isSectionExpanded(section.id) else {
-                // Still show the header even if collapsed
-                return ParameterSection(id: section.id, name: section.name, description: section.description, parameters: [])
+            if query.isEmpty && !deprecated {
+                return section
             }
 
             let filtered = section.parameters.filter { param in
@@ -44,11 +43,7 @@ class DocsViewModel: ObservableObject {
                 return matchesSearch && matchesFilter
             }
 
-            if query.isEmpty && !deprecated {
-                return ParameterSection(id: section.id, name: section.name, description: section.description, parameters: section.parameters)
-            }
-
-            if filtered.isEmpty && !query.isEmpty { return nil }
+            if filtered.isEmpty { return nil }
             return ParameterSection(id: section.id, name: section.name, description: section.description, parameters: filtered)
         }
     }
